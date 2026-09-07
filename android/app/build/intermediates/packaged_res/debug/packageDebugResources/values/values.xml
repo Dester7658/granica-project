@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#1565C0</color>
+    <string name="add_to_favorites">Добавить в избранное</string>
+    <string name="app_name">Granica</string>
+    <string name="camera_updated_at">Обновлено: %1$s</string>
+    <string name="countries_title">Страны</string>
+    <string name="crossings_title">Пограничные переходы</string>
+    <string name="empty_favorites">Пока нет избранных переходов</string>
+    <string name="error_loading">Не удалось загрузить данные</string>
+    <string name="favorites_title">Избранное</string>
+    <string name="remove_from_favorites">Убрать из избранного</string>
+    <string name="retry">Повторить</string>
+    <style name="Theme.Granica" parent="android:Theme.Material.Light.NoActionBar"/>
+</resources>

@@ -1,0 +1,18 @@
+
+> granica-backend@1.0.0 dev
+> ts-node-dev --respawn --transpile-only src/server.ts
+
+[INFO] 13:22:33 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.3)
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1948:16)
+    at listenInCluster (node:net:2005:12)
+    at Server.listen (node:net:2110:7)
+    at app.listen (C:\Users\hguln\Desktop\granica_project\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\hguln\Desktop\granica_project\backend\src\server.ts:15:5)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1812:14)
+    at Module._compile (C:\Users\hguln\Desktop\granica_project\backend\node_modules\source-map-support\source-map-support.js:568:25)
+    at Module.m._compile (C:\Users\hguln\AppData\Local\Temp\ts-node-dev-hook-054123771341384797.js:69:33)
+    at node:internal/modules/cjs/loader:1943:10
+    at require.extensions..jsx.require.extensions..js (C:\Users\hguln\AppData\Local\Temp\ts-node-dev-hook-054123771341384797.js:114:20)
+[ERROR] 13:22:34 Error: listen EADDRINUSE: address already in use :::3000
+^C^CЗавершить выполнение пакетного файла [Y(да)/N(нет)]? 

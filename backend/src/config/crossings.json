@@ -1,0 +1,575 @@
+{
+  "note": "Реестр стран и границ. countries — список стран для отображения (код + имя), даже без камер. borders — реальные пары стран с переходами; countryA/countryB — коды из countries. Камеры HAK (m.hak.hr) проверены вживую 2026-09-04 — каждая отдаёт настоящий JPEG. HAK не публикует время ожидания, только снимки. WSDOT (США-Канада) добавляется динамически в registryService при наличии WSDOT_ACCESS_CODE.",
+  "countries": [
+    { "code": "DEMO", "name": "Демо" },
+    { "code": "HR", "name": "Хорватия" },
+    { "code": "RS", "name": "Сербия" },
+    { "code": "BA", "name": "Босния и Герцеговина" },
+    { "code": "ME", "name": "Черногория" },
+    { "code": "AL", "name": "Албания" },
+    { "code": "TR", "name": "Турция" },
+    { "code": "XK", "name": "Косово" },
+    { "code": "BG", "name": "Болгария" },
+    { "code": "GR", "name": "Греция" },
+    { "code": "IT", "name": "Италия" },
+    { "code": "HU", "name": "Венгрия" },
+    { "code": "RO", "name": "Румыния" },
+    { "code": "MK", "name": "Северная Македония" },
+    { "code": "MD", "name": "Молдова" },
+    { "code": "AD", "name": "Андорра" },
+    { "code": "ES", "name": "Испания" },
+    { "code": "FR", "name": "Франция" },
+    { "code": "UA", "name": "Украина" },
+    { "code": "FI", "name": "Финляндия" },
+    { "code": "NO", "name": "Норвегия" },
+    { "code": "CH", "name": "Швейцария" },
+    { "code": "SM", "name": "Сан-Марино" },
+    { "code": "VA", "name": "Ватикан" },
+    { "code": "US", "name": "США" },
+    { "code": "CA", "name": "Канада" }
+  ],
+  "borders": [
+    {
+      "id": "demo-demo",
+      "countryA": "DEMO",
+      "countryB": "DEMO",
+      "crossings": [
+        {
+          "id": "demo-crossing-1",
+          "name": "Тестовый переход (демо)",
+          "isDemo": true,
+          "lat": 54.687,
+          "lon": 25.2797,
+          "direction": "both",
+          "cameras": [
+            {
+              "id": "cam-1",
+              "name": "Тестовая камера",
+              "type": "snapshot",
+              "snapshotUrl": "https://picsum.photos/seed/granica/800/600",
+              "refreshSeconds": 15
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hr-rs",
+      "countryA": "HR",
+      "countryB": "RS",
+      "crossings": [
+        {
+          "id": "hak-bajakovo",
+          "name": "Bajakovo / Батровци",
+          "lat": 45.111,
+          "lon": 19.07,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-2", "name": "Въезд в Хорватию из Сербии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=2", "refreshSeconds": 30 },
+            { "id": "cam-1", "name": "Выезд из Хорватии в Сербию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=1", "refreshSeconds": 30 },
+            { "id": "cam-3", "name": "Выезд из Хорватии в Сербию (2)", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=3", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-batina",
+          "name": "Batina",
+          "lat": 45.907,
+          "lon": 18.827,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-1017", "name": "Выезд из Хорватии в Сербию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=1017", "refreshSeconds": 30 },
+            { "id": "cam-1018", "name": "Въезд в Хорватию из Сербии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=1018", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-erdut",
+          "name": "Erdut",
+          "lat": 45.5486,
+          "lon": 18.9926,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-415", "name": "Выезд из Хорватии в Сербию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=415", "refreshSeconds": 30 },
+            { "id": "cam-416", "name": "Въезд в Хорватию из Сербии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=416", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-ilok",
+          "name": "Ilok",
+          "lat": 45.2136,
+          "lon": 19.3711,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-417", "name": "Выезд из Хорватии в Сербию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=417", "refreshSeconds": 30 },
+            { "id": "cam-418", "name": "Въезд в Хорватию из Сербии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=418", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-tovarnik",
+          "name": "Tovarnik / Šid (автомагистраль A3)",
+          "lat": 45.1611,
+          "lon": 19.1503,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-419", "name": "Выезд из Хорватии в Сербию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=419", "refreshSeconds": 30 },
+            { "id": "cam-420", "name": "Въезд в Хорватию из Сербии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=420", "refreshSeconds": 30 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hr-ba",
+      "countryA": "HR",
+      "countryB": "BA",
+      "crossings": [
+        {
+          "id": "hak-slavonski-brod",
+          "name": "Slavonski Brod / Bosanski Brod",
+          "lat": 45.1603,
+          "lon": 18.0114,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-195", "name": "Въезд в Хорватию из Боснии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=195", "refreshSeconds": 30 },
+            { "id": "cam-196", "name": "Выезд из Хорватии в Боснию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=196", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-slavonski-samac",
+          "name": "Slavonski Šamac / Šamac",
+          "lat": 45.07,
+          "lon": 18.4667,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-1015", "name": "Въезд в Хорватию из Боснии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=1015", "refreshSeconds": 30 },
+            { "id": "cam-1016", "name": "Выезд из Хорватии в Боснию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=1016", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-zupanja",
+          "name": "Županja / Orašje",
+          "lat": 45.0083,
+          "lon": 18.6919,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-79", "name": "Въезд в Хорватию из Боснии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=79", "refreshSeconds": 30 },
+            { "id": "cam-80", "name": "Выезд из Хорватии в Боснию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=80", "refreshSeconds": 30 },
+            { "id": "cam-401", "name": "Со стороны Боснии (Orašje)", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=401", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-gunja",
+          "name": "Gunja",
+          "lat": 44.8619,
+          "lon": 18.9308,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-431", "name": "Въезд в Хорватию из Боснии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=431", "refreshSeconds": 30 },
+            { "id": "cam-432", "name": "Выезд из Хорватии в Боснию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=432", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-svilaj",
+          "name": "Svilaj (автомагистраль A3)",
+          "lat": 45.1339,
+          "lon": 18.2378,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-461", "name": "Выезд из Хорватии в Боснию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=461", "refreshSeconds": 30 },
+            { "id": "cam-462", "name": "Общий вид", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=462", "refreshSeconds": 30 },
+            { "id": "cam-463", "name": "Въезд в Хорватию из Боснии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=463", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-stara-gradiska",
+          "name": "Stara Gradiška / Bosanska Gradiška",
+          "lat": 45.1517,
+          "lon": 17.2517,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-60", "name": "Въезд в Хорватию из Боснии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=60", "refreshSeconds": 30 },
+            { "id": "cam-59", "name": "Выезд из Хорватии в Боснию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=59", "refreshSeconds": 30 },
+            { "id": "cam-404", "name": "Со стороны Боснии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=404", "refreshSeconds": 30 },
+            { "id": "cam-405", "name": "Со стороны Боснии (2)", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=405", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-maljevac",
+          "name": "Maljevac / Izačić",
+          "lat": 44.9928,
+          "lon": 15.8667,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-429", "name": "Въезд в Хорватию из Боснии", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=429", "refreshSeconds": 30 },
+            { "id": "cam-430", "name": "Выезд из Хорватии в Боснию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=430", "refreshSeconds": 30 },
+            { "id": "cam-407", "name": "Со стороны Боснии (Izačić)", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=407", "refreshSeconds": 30 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hr-me",
+      "countryA": "HR",
+      "countryB": "ME",
+      "crossings": [
+        {
+          "id": "hak-karasovici",
+          "name": "Karasovići",
+          "lat": 42.5219,
+          "lon": 18.4331,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-197", "name": "Въезд в Хорватию из Черногории", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=197", "refreshSeconds": 30 },
+            { "id": "cam-198", "name": "Выезд из Хорватии в Черногорию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=198", "refreshSeconds": 30 }
+          ]
+        },
+        {
+          "id": "hak-vitaljina",
+          "name": "Vitaljina",
+          "lat": 42.4394,
+          "lon": 18.4703,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-455", "name": "Въезд в Хорватию из Черногории", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=455", "refreshSeconds": 30 },
+            { "id": "cam-456", "name": "Выезд из Хорватии в Черногорию", "type": "snapshot", "snapshotUrl": "https://m.hak.hr/cam.asp?id=456", "refreshSeconds": 30 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rs-ba",
+      "countryA": "RS",
+      "countryB": "BA",
+      "crossings": [
+        {
+          "id": "bih-sepak",
+          "name": "Šepak / Loznica",
+          "lat": 44.6447,
+          "lon": 19.1458,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-sepak", "name": "Šepak - со стороны Боснии", "type": "snapshot", "snapshotUrl": "https://video-nadzor.bihamk.ba/videosurveillence/SEPAK.jpg", "refreshSeconds": 60 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rs-bg",
+      "countryA": "RS",
+      "countryB": "BG",
+      "crossings": [
+        {
+          "id": "amss-gradina",
+          "name": "Gradina / Калотина (E-80)",
+          "lat": 43.2347,
+          "lon": 22.5942,
+          "direction": "both",
+          "cameras": [
+            { "id": "amss-gradina", "name": "AMSS: Градина (официальная страница)", "type": "webview", "pageUrl": "https://kamere.amss.org.rs/", "refreshSeconds": 60 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rs-hu",
+      "countryA": "RS",
+      "countryB": "HU",
+      "crossings": [
+        {
+          "id": "amss-horgos",
+          "name": "Horgoš / Röszke (E-75)",
+          "lat": 46.1728,
+          "lon": 19.9708,
+          "direction": "both",
+          "cameras": [
+            { "id": "amss-horgos", "name": "AMSS: Horgoš (официальная страница)", "type": "webview", "pageUrl": "https://kamere.amss.org.rs/", "refreshSeconds": 60 },
+            { "id": "hu-border-info", "name": "Полиция Венгрии: ожидание на границе", "type": "webview", "pageUrl": "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo", "refreshSeconds": 300 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rs-ro",
+      "countryA": "RS",
+      "countryB": "RO",
+      "crossings": []
+    },
+    {
+      "id": "rs-mk",
+      "countryA": "RS",
+      "countryB": "MK",
+      "crossings": [
+        {
+          "id": "amss-presevo",
+          "name": "Preševo / Табановце (E-75)",
+          "lat": 42.3028,
+          "lon": 21.7503,
+          "direction": "both",
+          "cameras": [
+            { "id": "amss-presevo", "name": "AMSS: Preševo (официальная страница)", "type": "webview", "pageUrl": "https://kamere.amss.org.rs/", "refreshSeconds": 60 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rs-xk",
+      "countryA": "RS",
+      "countryB": "XK",
+      "crossings": []
+    },
+    {
+      "id": "rs-me",
+      "countryA": "RS",
+      "countryB": "ME",
+      "crossings": [
+        {
+          "id": "me-dracenovac",
+          "name": "Dračenovac / Вуча",
+          "lat": 42.8403,
+          "lon": 20.1683,
+          "direction": "both",
+          "cameras": [
+            { "id": "me-dracenovac-page", "name": "МВД Черногории: Dračenovac (видео)", "type": "webview", "pageUrl": "http://kamere.mup.gov.me/kamere.php?kamere=Dracenovac&lang=me", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "me-dobrakovo",
+          "name": "Dobrakovo / Гостун",
+          "lat": 43.0914,
+          "lon": 19.7367,
+          "direction": "both",
+          "cameras": [
+            { "id": "me-dobrakovo-page", "name": "МВД Черногории: Dobrakovo (видео)", "type": "webview", "pageUrl": "http://kamere.mup.gov.me/kamere.php?kamere=Dobrakovo&lang=me", "refreshSeconds": 60 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "al-me",
+      "countryA": "AL",
+      "countryB": "ME",
+      "crossings": [
+        {
+          "id": "me-bozaj",
+          "name": "Božaj / Hani i Hotit",
+          "lat": 42.3797,
+          "lon": 19.5367,
+          "direction": "both",
+          "cameras": [
+            { "id": "me-bozaj-page", "name": "МВД Черногории: Božaj", "type": "webview", "pageUrl": "http://kamere.mup.gov.me/kamere.php?kamere=Bozaj&lang=me", "refreshSeconds": 60 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "al-xk",
+      "countryA": "AL",
+      "countryB": "XK",
+      "crossings": []
+    },
+    {
+      "id": "ba-me",
+      "countryA": "BA",
+      "countryB": "ME",
+      "crossings": [
+        {
+          "id": "me-vracenovici",
+          "name": "Vraćenovići / Deleuša",
+          "lat": 42.8075,
+          "lon": 18.5586,
+          "direction": "both",
+          "cameras": [
+            { "id": "me-vracenovici-page", "name": "МВД Черногории: Vraćenovići (видео)", "type": "webview", "pageUrl": "http://kamere.mup.gov.me/kamere.php?kamere=Vracenovici&lang=me", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "me-scepan-polje",
+          "name": "Šćepan Polje / Hum",
+          "lat": 43.3469,
+          "lon": 18.8464,
+          "direction": "both",
+          "cameras": [
+            { "id": "me-scepan-polje-page", "name": "МВД Черногории: Šćepan Polje (видео)", "type": "webview", "pageUrl": "http://kamere.mup.gov.me/kamere.php?kamere=Scepan%20polje&lang=me", "refreshSeconds": 60 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "al-mk",
+      "countryA": "AL",
+      "countryB": "MK",
+      "crossings": []
+    },
+    {
+      "id": "al-gr",
+      "countryA": "AL",
+      "countryB": "GR",
+      "crossings": []
+    },
+    {
+      "id": "bg-mk",
+      "countryA": "BG",
+      "countryB": "MK",
+      "crossings": []
+    },
+    {
+      "id": "bg-ro",
+      "countryA": "BG",
+      "countryB": "RO",
+      "crossings": []
+    },
+    {
+      "id": "gr-mk",
+      "countryA": "GR",
+      "countryB": "MK",
+      "crossings": []
+    },
+    {
+      "id": "ro-md",
+      "countryA": "RO",
+      "countryB": "MD",
+      "crossings": [
+        {
+          "id": "md-leuseni",
+          "name": "Leușeni / Albița",
+          "lat": 46.8092,
+          "lon": 28.1531,
+          "direction": "both",
+          "cameras": [
+            { "id": "md-leuseni-cam", "name": "Таможня Молдовы: Leușeni", "type": "snapshot", "snapshotUrl": "https://customs.gov.md/api/media/images/leuseni/snapshot.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "md-sculeni",
+          "name": "Sculeni / Скулень",
+          "lat": 47.6958,
+          "lon": 27.4153,
+          "direction": "both",
+          "cameras": [
+            { "id": "md-sculeni-cam", "name": "Таможня Молдовы: Sculeni", "type": "snapshot", "snapshotUrl": "https://customs.gov.md/api/media/images/sculeni/snapshot.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "md-otaci",
+          "name": "Otaci / Могилёв-Подольский",
+          "lat": 48.4319,
+          "lon": 27.7939,
+          "direction": "both",
+          "cameras": [
+            { "id": "md-otaci-cam", "name": "Таможня Молдовы: Otaci", "type": "snapshot", "snapshotUrl": "https://customs.gov.md/api/media/images/otaci/snapshot.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "ro-online-traffic",
+          "name": "Очереди на КПП Румынии",
+          "lat": 46.8092,
+          "lon": 28.1531,
+          "direction": "both",
+          "cameras": [
+            { "id": "ro-online-traffic-page", "name": "Погранполиция Румынии: актуальные очереди", "type": "webview", "pageUrl": "https://www.politiadefrontiera.ro/ro/traficonline/", "refreshSeconds": 300 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ro-ua",
+      "countryA": "RO",
+      "countryB": "UA",
+      "crossings": []
+    },
+    {
+      "id": "ad-es",
+      "countryA": "AD",
+      "countryB": "ES",
+      "crossings": []
+    },
+    {
+      "id": "ad-fr",
+      "countryA": "AD",
+      "countryB": "FR",
+      "crossings": []
+    },
+    {
+      "id": "it-sm",
+      "countryA": "IT",
+      "countryB": "SM",
+      "crossings": []
+    },
+    {
+      "id": "it-va",
+      "countryA": "IT",
+      "countryB": "VA",
+      "crossings": []
+    },
+    {
+      "id": "fi-no",
+      "countryA": "FI",
+      "countryB": "NO",
+      "crossings": []
+    },
+    {
+      "id": "tr-bg",
+      "countryA": "TR",
+      "countryB": "BG",
+      "note": "Официальный источник: T.C. Ticaret Bakanlığı, Trakya Gümrük ve Dış Ticaret Bölge Müdürlüğü (trakya.ticaret.gov.tr/yayinlar/canli-kameralar). Страница проверена вживую (HTTP 200), но сами файлы картинок на trakya.iscoz.com блокируют серверные запросы (403 даже с корректным Referer) — поэтому камера открывается как officialная веб-страница (webview) в приложении, а не как прямой снимок.",
+      "crossings": [
+        {
+          "id": "tr-kapikule",
+          "name": "Kapıkule / Капитан Андреево",
+          "lat": 41.9646,
+          "lon": 26.5946,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-kapikule", "name": "Камеры Kapıkule (офиц. сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+          ]
+        },
+        {
+          "id": "tr-hamzabeyli",
+          "name": "Hamzabeyli",
+          "lat": 41.8664,
+          "lon": 26.3536,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-hamzabeyli", "name": "Камеры Hamzabeyli (офиц. сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+          ]
+        },
+        {
+          "id": "tr-derekoy",
+          "name": "Dereköy",
+          "lat": 42.0167,
+          "lon": 27.5333,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-derekoy", "name": "Камеры Dereköy (офиц. сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tr-gr",
+      "countryA": "TR",
+      "countryB": "GR",
+      "note": "Тот же официальный источник (trakya.ticaret.gov.tr), переходы с Грецией.",
+      "crossings": [
+        {
+          "id": "tr-ipsala",
+          "name": "İpsala",
+          "lat": 40.9119,
+          "lon": 26.3833,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-ipsala", "name": "Камеры İpsala (офиц. сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+          ]
+        },
+        {
+          "id": "tr-pazarkule",
+          "name": "Pazarkule / Kastanies",
+          "lat": 41.6975,
+          "lon": 26.5511,
+          "direction": "both",
+          "cameras": [
+            { "id": "cam-pazarkule", "name": "Камеры Pazarkule (офиц. сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+          ]
+        }
+      ]
+    }
+  ]
+}
