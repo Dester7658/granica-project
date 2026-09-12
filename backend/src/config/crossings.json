@@ -246,7 +246,52 @@
           "lon": 19.1458,
           "direction": "both",
           "cameras": [
-            { "id": "cam-sepak", "name": "Šepak - со стороны Боснии", "type": "snapshot", "snapshotUrl": "https://video-nadzor.bihamk.ba/videosurveillence/SEPAK.jpg", "refreshSeconds": 60 }
+            { "id": "cam-sepak", "name": "Šepak - со стороны Боснии", "type": "snapshot", "snapshotUrl": "https://video-nadzor.bihamk.ba/videosurveillence/SEPAK.jpg", "refreshSeconds": 60 },
+            { "id": "amss-sepak-in", "name": "Šepak - ulaz u Republiku Srpsku", "type": "snapshot", "snapshotUrl": "https://gp.satwork.net/AMSRS_06_GP_SP02/slika.jpg", "refreshSeconds": 60 },
+            { "id": "amss-sepak-out", "name": "Šepak - izlaz iz Republike Srpske", "type": "snapshot", "snapshotUrl": "https://gp.satwork.net/AMSRS_06_GP_SP01/slika.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "bih-raca",
+          "name": "Rača / Republika Srpska",
+          "lat": 44.8276,
+          "lon": 19.1286,
+          "direction": "both",
+          "cameras": [
+            { "id": "amss-raca-in", "name": "Rača - ulaz u Republiku Srpsku", "type": "snapshot", "snapshotUrl": "https://gp.satwork.net/AMSRS_02_GP_RA02/slika.jpg?v=1789217970936", "refreshSeconds": 60 },
+            { "id": "amss-raca-out", "name": "Rača - izlaz iz Republike Srpske", "type": "snapshot", "snapshotUrl": "https://gp.satwork.net/AMSRS_02_GP_RA01/slika.jpg?v=1789217970936", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "bih-pavlovica-most",
+          "name": "Pavlovića Most / Republika Srpska",
+          "lat": 44.6882,
+          "lon": 19.1171,
+          "direction": "both",
+          "cameras": [
+            { "id": "amss-pavlovica-in", "name": "Pavlovića Most - ulaz u Republiku Srpsku", "type": "snapshot", "snapshotUrl": "https://gp.satwork.net/AMSRS_05_GP_PM02/slika.jpg", "refreshSeconds": 60 },
+            { "id": "amss-pavlovica-out", "name": "Pavlovića Most - izlaz iz Republike Srpske", "type": "snapshot", "snapshotUrl": "https://gp.satwork.net/AMSRS_05_GP_PM01/slika.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "bih-karakaj",
+          "name": "Karakaj / Republika Srpska",
+          "lat": 44.2264,
+          "lon": 19.4318,
+          "direction": "both",
+          "cameras": [
+            { "id": "amss-karakaj-in", "name": "Karakaj - ulaz u Republiku Srpsku", "type": "snapshot", "snapshotUrl": "https://gp.satwork.net/AMSRS_07_GP_KA02/slika.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "bih-visegrad",
+          "name": "Višegrad / Republika Srpska",
+          "lat": 43.7853,
+          "lon": 19.2918,
+          "direction": "both",
+          "cameras": [
+            { "id": "amss-visegrad-in", "name": "Višegrad - ulaz u Republiku Srpsku", "type": "snapshot", "snapshotUrl": "https://gp.satwork.net/AMSRS_16_GP_VA02/slika.jpg", "refreshSeconds": 60 },
+            { "id": "amss-visegrad-out", "name": "Višegrad - izlaz iz Republike Srpske", "type": "snapshot", "snapshotUrl": "https://gp.satwork.net/AMSRS_16_GP_VA01/slika.jpg", "refreshSeconds": 60 }
           ]
         }
       ]
