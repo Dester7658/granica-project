@@ -509,7 +509,7 @@
       "id": "tr-bg",
       "countryA": "TR",
       "countryB": "BG",
-      "note": "Официальный источник: T.C. Ticaret Bakanlığı, Trakya Gümrük ve Dış Ticaret Bölge Müdürlüğü. Поскольку прямые JPG-ссылки blok-ятся server-side с 403, для Турции используется официальный webview-режим, где страница открывается напрямую в приложении и браузер сам рендерит камеру.",
+      "note": "Для Турции открываем прямую JPG-ссылку в WebView, потому что это работает как в браузере и даёт реальную картинку без переходов по сайту с выбором камер.",
       "crossings": [
         {
           "id": "tr-kapikule",
@@ -518,7 +518,7 @@
           "lon": 26.5946,
           "direction": "both",
           "cameras": [
-            { "id": "cam-kapikule", "name": "Камеры Kapıkule (официальный сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+            { "id": "cam-kapikule", "name": "Kapıkule — Yolcu Giriş Peronları", "type": "webview", "pageUrl": "https://trakya.iscoz.com/kapikule/yolcugiris.jpg", "refreshSeconds": 600 }
           ]
         },
         {
@@ -528,7 +528,7 @@
           "lon": 26.3536,
           "direction": "both",
           "cameras": [
-            { "id": "cam-hamzabeyli", "name": "Камеры Hamzabeyli (официальный сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+            { "id": "cam-hamzabeyli", "name": "Hamzabeyli — Yolcu Giriş", "type": "webview", "pageUrl": "https://trakya.iscoz.com/hamzabeyli/yolcugiris.jpg", "refreshSeconds": 600 }
           ]
         },
         {
@@ -538,7 +538,7 @@
           "lon": 27.5333,
           "direction": "both",
           "cameras": [
-            { "id": "cam-derekoy", "name": "Камеры Dereköy (официальный сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+            { "id": "cam-derekoy", "name": "Dereköy — Türkiye Kapı", "type": "webview", "pageUrl": "https://trakya.iscoz.com/derekoy/turkiyekapi.jpg", "refreshSeconds": 600 }
           ]
         }
       ]
@@ -547,7 +547,7 @@
       "id": "tr-gr",
       "countryA": "TR",
       "countryB": "GR",
-      "note": "Тот же официальный источник: страница открывается в WebView, потому что прямой JPG-доступ на стороне сервера блокируется 403.",
+      "note": "Прямые JPG-ссылки открываются в WebView как браузерные картинки, не как сайт с выбором камер.",
       "crossings": [
         {
           "id": "tr-ipsala",
@@ -556,7 +556,7 @@
           "lon": 26.3833,
           "direction": "both",
           "cameras": [
-            { "id": "cam-ipsala", "name": "Камеры İpsala (официальный сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+            { "id": "cam-ipsala", "name": "İpsala — Giris Peronlar", "type": "webview", "pageUrl": "https://trakya.iscoz.com/ipsala/GirisPeronlar.jpg", "refreshSeconds": 600 }
           ]
         },
         {
@@ -566,7 +566,7 @@
           "lon": 26.5511,
           "direction": "both",
           "cameras": [
-            { "id": "cam-pazarkule", "name": "Камеры Pazarkule (официальный сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+            { "id": "cam-pazarkule", "name": "Pazarkule — Yolcu Giriş", "type": "webview", "pageUrl": "https://trakya.iscoz.com/pazarkule/yolcugiris.jpg", "refreshSeconds": 600 }
           ]
         }
       ]
