@@ -308,7 +308,8 @@
           "lon": 22.5942,
           "direction": "both",
           "cameras": [
-            { "id": "amss-gradina", "name": "AMSS: Градина (официальная страница)", "type": "webview", "pageUrl": "https://kamere.amss.org.rs/", "refreshSeconds": 60 }
+            { "id": "amss-gradina-in", "name": "Gradina - ulazak u Srbiju iz Bugarske", "type": "stream", "streamUrl": "https://kamere.amss.org.rs/gradina1/gradina1.m3u8", "refreshSeconds": 60 },
+            { "id": "amss-gradina-out", "name": "Gradina - izlazak iz Srbije u Bugarsku", "type": "stream", "streamUrl": "https://kamere.amss.org.rs/gradina2/gradina2.m3u8", "refreshSeconds": 60 }
           ]
         }
       ]
@@ -325,7 +326,8 @@
           "lon": 19.9708,
           "direction": "both",
           "cameras": [
-            { "id": "amss-horgos", "name": "AMSS: Horgoš (официальная страница)", "type": "webview", "pageUrl": "https://kamere.amss.org.rs/", "refreshSeconds": 60 },
+            { "id": "amss-horgos-in", "name": "Horgoš - ulazak u Srbiju iz Mađarske", "type": "stream", "streamUrl": "https://kamere.amss.org.rs/horgos1/horgos1.m3u8", "refreshSeconds": 60 },
+            { "id": "amss-horgos-out", "name": "Horgoš - izlazak iz Srbije u Mađarsku", "type": "stream", "streamUrl": "https://kamere.amss.org.rs/horgos2/horgos2.m3u8", "refreshSeconds": 60 },
             { "id": "hu-border-info", "name": "Полиция Венгрии: ожидание на границе", "type": "webview", "pageUrl": "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo", "refreshSeconds": 300 }
           ]
         }
@@ -349,7 +351,8 @@
           "lon": 21.7503,
           "direction": "both",
           "cameras": [
-            { "id": "amss-presevo", "name": "AMSS: Preševo (официальная страница)", "type": "webview", "pageUrl": "https://kamere.amss.org.rs/", "refreshSeconds": 60 }
+            { "id": "amss-presevo-in", "name": "Preševo - ulazak u Srbiju iz Severne Makedonije", "type": "stream", "streamUrl": "https://kamere.amss.org.rs/presevo1/presevo1.m3u8", "refreshSeconds": 60 },
+            { "id": "amss-presevo-out", "name": "Preševo - izlazak iz Srbije u Severnu Makedoniju", "type": "stream", "streamUrl": "https://kamere.amss.org.rs/presevo2/presevo2.m3u8", "refreshSeconds": 60 }
           ]
         }
       ]
