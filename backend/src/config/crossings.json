@@ -327,7 +327,8 @@
           "lon": 20.1683,
           "direction": "both",
           "cameras": [
-            { "id": "me-dracenovac-page", "name": "МВД Черногории: Dračenovac (видео)", "type": "webview", "pageUrl": "http://kamere.mup.gov.me/kamere.php?kamere=Dracenovac&lang=me", "refreshSeconds": 60 }
+            { "id": "me-dracenovac-ulaz", "name": "Dračenovac — Ulaz", "type": "stream", "streamUrl": "http://kamere.mup.gov.me/video/Dracenovac/Ulaz/Dracenovac_Ulaz.mp4_0.mp4", "refreshSeconds": 60 },
+            { "id": "me-dracenovac-izlaz", "name": "Dračenovac — Izlaz", "type": "stream", "streamUrl": "http://kamere.mup.gov.me/video/Dracenovac/Izlaz/Dracenovac_Izlaz.mp4_0.mp4", "refreshSeconds": 60 }
           ]
         },
         {
@@ -337,7 +338,7 @@
           "lon": 19.7367,
           "direction": "both",
           "cameras": [
-            { "id": "me-dobrakovo-page", "name": "МВД Черногории: Dobrakovo (видео)", "type": "webview", "pageUrl": "http://kamere.mup.gov.me/kamere.php?kamere=Dobrakovo&lang=me", "refreshSeconds": 60 }
+            { "id": "me-dobrakovo-page", "name": "Dobrakovo (видео)", "type": "stream", "streamUrl": "http://kamere.mup.gov.me/video/Dobrakovo/Ulaz/Dobrakovo_Ulaz.mp4_1.mp4", "refreshSeconds": 60 }
           ]
         }
       ]
@@ -354,7 +355,8 @@
           "lon": 19.5367,
           "direction": "both",
           "cameras": [
-            { "id": "me-bozaj-page", "name": "МВД Черногории: Božaj", "type": "webview", "pageUrl": "http://kamere.mup.gov.me/kamere.php?kamere=Bozaj&lang=me", "refreshSeconds": 60 }
+            { "id": "me-bozaj-ulaz", "name": "Božaj — Ulaz", "type": "stream", "streamUrl": "http://kamere.mup.gov.me/video/Bozaj/Ulaz/Bozaj_Ulaz.mp4_1.mp4", "refreshSeconds": 60 },
+            { "id": "me-bozaj-izlaz", "name": "Božaj — Izlaz", "type": "stream", "streamUrl": "http://kamere.mup.gov.me/video/Bozaj/Izlaz/Bozaj_Izlaz.mp4_1.mp4", "refreshSeconds": 60 }
           ]
         }
       ]
@@ -377,7 +379,8 @@
           "lon": 18.5586,
           "direction": "both",
           "cameras": [
-            { "id": "me-vracenovici-page", "name": "МВД Черногории: Vraćenovići (видео)", "type": "webview", "pageUrl": "http://kamere.mup.gov.me/kamere.php?kamere=Vracenovici&lang=me", "refreshSeconds": 60 }
+            { "id": "me-vracenovici-ulaz", "name": "Vraćenovići — Ulaz", "type": "stream", "streamUrl": "http://kamere.mup.gov.me/video/Vracenovici/Ulaz/Vracenovici_Ulaz.mp4_1.mp4", "refreshSeconds": 60 },
+            { "id": "me-vracenovici-izlaz", "name": "Vraćenovići — Izlaz", "type": "stream", "streamUrl": "http://kamere.mup.gov.me/video/Vracenovici/Izlaz/Vracenovici_Izlaz.mp4_1.mp4", "refreshSeconds": 60 }
           ]
         },
         {
