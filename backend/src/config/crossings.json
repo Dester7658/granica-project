@@ -509,7 +509,7 @@
       "id": "tr-bg",
       "countryA": "TR",
       "countryB": "BG",
-      "note": "Официальный источник: T.C. Ticaret Bakanlığı, Trakya Gümrük ve Dış Ticaret Bölge Müdürlüğü (trakya.ticaret.gov.tr/yayinlar/canli-kameralar). Страница проверена вживую (HTTP 200), но сами файлы картинок на trakya.iscoz.com блокируют серверные запросы (403 даже с корректным Referer) — поэтому камера открывается как officialная веб-страница (webview) в приложении, а не как прямой снимок.",
+      "note": "Официальный источник: T.C. Ticaret Bakanlığı, Trakya Gümrük ve Dış Ticaret Bölge Müdürlüğü. На странице есть прямые JPG-URL'ы камер на trakya.iscoz.com — они используются напрямую, без открытия сайта и без WebView.",
       "crossings": [
         {
           "id": "tr-kapikule",
@@ -518,7 +518,10 @@
           "lon": 26.5946,
           "direction": "both",
           "cameras": [
-            { "id": "cam-kapikule", "name": "Камеры Kapıkule (офиц. сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+            { "id": "cam-kapikule-giris", "name": "Kapıkule — Yolcu Giriş Peronları", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/kapikule/yolcugiris.jpg", "refreshSeconds": 600 },
+            { "id": "cam-kapikule-cikis1", "name": "Kapıkule — Yolcu Çıkış Hudut", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/kapikule/yolcucikis1.jpg", "refreshSeconds": 600 },
+            { "id": "cam-kapikule-cikis2", "name": "Kapıkule — Yolcu Çıkış Peronları", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/kapikule/yolcucikis.jpg", "refreshSeconds": 600 },
+            { "id": "cam-kapikule-edirne", "name": "Kapıkule — Yolcu Çıkış Edirne Kapı", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/kapikule/edirnekapi.jpg", "refreshSeconds": 600 }
           ]
         },
         {
@@ -528,7 +531,9 @@
           "lon": 26.3536,
           "direction": "both",
           "cameras": [
-            { "id": "cam-hamzabeyli", "name": "Камеры Hamzabeyli (офиц. сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+            { "id": "cam-hamzabeyli-giris", "name": "Hamzabeyli — Yolcu Giriş", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/hamzabeyli/yolcugiris.jpg", "refreshSeconds": 600 },
+            { "id": "cam-hamzabeyli-cikis", "name": "Hamzabeyli — Yolcu Çıkış", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/hamzabeyli/yolcucikis.jpg", "refreshSeconds": 600 },
+            { "id": "cam-hamzabeyli-turkiye", "name": "Hamzabeyli — Türkiye Yolu", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/hamzabeyli/turkiyeyolu.jpg", "refreshSeconds": 600 }
           ]
         },
         {
@@ -538,7 +543,8 @@
           "lon": 27.5333,
           "direction": "both",
           "cameras": [
-            { "id": "cam-derekoy", "name": "Камеры Dereköy (офиц. сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+            { "id": "cam-derekoy-kapi", "name": "Dereköy — Türkiye Kapı", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/derekoy/turkiyekapi.jpg", "refreshSeconds": 600 },
+            { "id": "cam-derekoy-hudut", "name": "Dereköy — Hudut Kapı", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/derekoy/hudutkapi.jpg", "refreshSeconds": 600 }
           ]
         }
       ]
@@ -547,7 +553,7 @@
       "id": "tr-gr",
       "countryA": "TR",
       "countryB": "GR",
-      "note": "Тот же официальный источник (trakya.ticaret.gov.tr), переходы с Грецией.",
+      "note": "Тот же официальный источник (trakya.ticaret.gov.tr), переходы с Грецией. Используются прямые JPG URL без открытия сайта.",
       "crossings": [
         {
           "id": "tr-ipsala",
@@ -556,7 +562,9 @@
           "lon": 26.3833,
           "direction": "both",
           "cameras": [
-            { "id": "cam-ipsala", "name": "Камеры İpsala (офиц. сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+            { "id": "cam-ipsala-giris", "name": "İpsala — Giris Peronlar", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/ipsala/GirisPeronlar.jpg", "refreshSeconds": 600 },
+            { "id": "cam-ipsala-yunan", "name": "İpsala — Turkiye-Giris-YunanTarafi", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/ipsala/Turkiye-Giris-YunanTarafi.jpg", "refreshSeconds": 600 },
+            { "id": "cam-ipsala-turkiye", "name": "İpsala — Turkiye-Cikis-TurkiyeTarafi", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/ipsala/Turkiye-Cikis-TurkiyeTarafi.jpg", "refreshSeconds": 600 }
           ]
         },
         {
@@ -566,7 +574,8 @@
           "lon": 26.5511,
           "direction": "both",
           "cameras": [
-            { "id": "cam-pazarkule", "name": "Камеры Pazarkule (офиц. сайт)", "type": "webview", "pageUrl": "https://trakya.ticaret.gov.tr/yayinlar/canli-kameralar", "refreshSeconds": 600 }
+            { "id": "cam-pazarkule-giris", "name": "Pazarkule — Yolcu Giriş", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/pazarkule/yolcugiris.jpg", "refreshSeconds": 600 },
+            { "id": "cam-pazarkule-cikis", "name": "Pazarkule — Yolcu Çıkış", "type": "snapshot", "snapshotUrl": "https://trakya.iscoz.com/pazarkule/yolcucikis.jpg", "refreshSeconds": 600 }
           ]
         }
       ]

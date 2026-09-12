@@ -16,9 +16,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        // 10.0.2.2 is the special alias the Android emulator uses to reach
-        // "localhost" on the host machine where the backend runs in dev.
-        buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3000/\"")
+        // Production backend hosted on Vercel.
+        buildConfigField("String", "BASE_URL", "\"https://granica-api.vercel.app/\"")
     }
 
     buildTypes {
@@ -61,6 +60,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
 
     implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("androidx.media3:media3-exoplayer:1.4.1")
+    implementation("androidx.media3:media3-ui:1.4.1")
 
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0")

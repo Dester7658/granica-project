@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.granica.app-mergeDebugResources-53:/values-pt-rBR/values-pt-rBR.xml",
+            "outputFile": "com.granica.app-mergeDebugResources-57:/values-pt-rBR/values-pt-rBR.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hguln\\.gradle\\caches\\transforms-4\\088e322c0ef27b6e7ad2b2579a2a9352\\transformed\\core-1.13.1\\res\\values-pt-rBR\\values-pt-rBR.xml",

@@ -28,6 +28,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -39,11 +40,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.media3.common.MediaItem
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
 import coil.compose.AsyncImage
 import com.granica.app.R
 import com.granica.app.data.api.NetworkModule
@@ -124,17 +129,15 @@ private fun CameraCard(crossing: CrossingDto, camera: CameraDto) {
         ) {
             if (!isEnabled) {
                 DisabledCamera(onEnable = { isEnabled = true })
-            } else if (camera.type == "webview" && camera.pageUrl != null) {
-                WebViewCamera(url = camera.pageUrl, modifier = Modifier.fillMaxWidth().aspectRatio(4f / 3f))
             } else {
-                SnapshotCamera(
+                CameraDisplay(
                     crossing = crossing,
                     camera = camera,
                     modifier = Modifier.clickable { isFullscreen = true }
                 )
             }
         }
-        if (isEnabled && camera.type == "webview" && camera.pageUrl != null) {
+        if (isEnabled && (camera.type == "webview" || camera.pageUrl != null) && camera.snapshotUrl == null && camera.streamUrl == null) {
             Button(onClick = { isFullscreen = true }, modifier = Modifier.padding(top = 8.dp)) {
                 Text("Открыть во весь экран")
             }
@@ -164,6 +167,31 @@ private fun DisabledCamera(onEnable: () -> Unit) {
 }
 
 @Composable
+private fun CameraDisplay(crossing: CrossingDto, camera: CameraDto, modifier: Modifier = Modifier) {
+    when {
+        camera.streamUrl != null && (camera.type == "hls" || camera.type == "mjpeg" || camera.type == "stream") -> {
+            VideoCamera(streamUrl = camera.streamUrl, modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f))
+        }
+        camera.snapshotUrl != null -> {
+            SnapshotCamera(
+                crossing = crossing,
+                camera = camera,
+                modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f)
+            )
+        }
+        camera.pageUrl != null -> {
+            WebViewCamera(url = camera.pageUrl, modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f))
+        }
+        camera.type == "webview" && camera.pageUrl != null -> {
+            WebViewCamera(url = camera.pageUrl, modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f))
+        }
+        else -> {
+            DisabledCamera(onEnable = {})
+        }
+    }
+}
+
+@Composable
 private fun SnapshotCamera(crossing: CrossingDto, camera: CameraDto, modifier: Modifier = Modifier) {
     val refreshMillis = (camera.refreshSeconds ?: 15) * 1000L
     var reloadTick by remember { mutableIntStateOf(0) }
@@ -176,9 +204,38 @@ private fun SnapshotCamera(crossing: CrossingDto, camera: CameraDto, modifier: M
     }
 
     AsyncImage(
-        model = NetworkModule.snapshotUrl(crossing.id, camera.id) + "&tick=$reloadTick",
+        model = camera.snapshotUrl ?: (NetworkModule.snapshotUrl(crossing.id, camera.id) + "&tick=$reloadTick"),
         contentDescription = camera.name,
-        modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f)
+        modifier = modifier
+    )
+}
+
+@Composable
+private fun VideoCamera(streamUrl: String, modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    val player = remember(context, streamUrl) {
+        ExoPlayer.Builder(context)
+            .build()
+            .apply {
+                setMediaItem(MediaItem.fromUri(streamUrl))
+                playWhenReady = true
+                prepare()
+            }
+    }
+
+    DisposableEffect(player) {
+        onDispose { player.release() }
+    }
+
+    AndroidView(
+        factory = { ctx ->
+            PlayerView(ctx).apply {
+                this.player = player
+                useController = true
+                controllerAutoShow = true
+            }
+        },
+        modifier = modifier
     )
 }
 

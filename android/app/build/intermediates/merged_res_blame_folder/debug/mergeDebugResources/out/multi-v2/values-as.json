@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.granica.app-mergeDebugResources-53:/values-as/values-as.xml",
+            "outputFile": "com.granica.app-mergeDebugResources-57:/values-as/values-as.xml",
             "map": [
                 {
                     "source": "C:\\Users\\hguln\\.gradle\\caches\\transforms-4\\f41fef7deb217ea57e1d84dbdcc5c7cf\\transformed\\foundation-release\\res\\values-as\\values-as.xml",
