@@ -56,7 +56,7 @@ fun GranicaNavGraph(repository: GranicaRepository, settings: AppSettings) {
     val navController = rememberNavController()
 
     Scaffold(
-        bottomBar = { BottomBar(navController) }
+        bottomBar = { BottomBar(navController, settings) }
     ) { padding ->
         NavHost(
             navController = navController,
@@ -152,7 +152,7 @@ fun GranicaNavGraph(repository: GranicaRepository, settings: AppSettings) {
 }
 
 @Composable
-private fun BottomBar(navController: NavHostController) {
+private fun BottomBar(navController: NavHostController, settings: AppSettings) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination
 
@@ -167,7 +167,7 @@ private fun BottomBar(navController: NavHostController) {
                 }
             },
             icon = { Icon(Icons.Filled.List, contentDescription = null) },
-            label = { Text("Страны") }
+            label = { Text(settings.uiText("from")) }
         )
         NavigationBarItem(
             selected = currentRoute?.hierarchy?.any { it.route == Routes.FAVORITES } == true,
@@ -179,7 +179,7 @@ private fun BottomBar(navController: NavHostController) {
                 }
             },
             icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
-            label = { Text("Избранное") }
+            label = { Text(settings.uiText("favorites")) }
         )
         NavigationBarItem(
             selected = currentRoute?.hierarchy?.any { it.route == Routes.SETTINGS } == true,
@@ -191,7 +191,7 @@ private fun BottomBar(navController: NavHostController) {
                 }
             },
             icon = { Icon(Icons.Filled.Settings, contentDescription = null) },
-            label = { Text("Настройки") }
+            label = { Text(settings.uiText("settings")) }
         )
     }
 }

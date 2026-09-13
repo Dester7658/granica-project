@@ -54,7 +54,7 @@ private val GranicaTypography = androidx.compose.material3.Typography(
 )
 
 @Composable
-fun GranicaTheme(content: @Composable () -> Unit) {
-    val colors = if (isSystemInDarkTheme()) DarkColors else LightColors
+fun GranicaTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+    val colors = if (darkTheme) DarkColors else LightColors
     MaterialTheme(colorScheme = colors, typography = GranicaTypography, content = content)
 }

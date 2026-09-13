@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         val settings = app.settings
         settings.applySelectedLanguage(this)
         setContent {
-            GranicaTheme {
+            GranicaTheme(darkTheme = settings.darkModeEnabled) {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     GranicaNavGraph(repository = repository, settings = settings)
                 }

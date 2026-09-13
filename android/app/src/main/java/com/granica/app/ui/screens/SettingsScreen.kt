@@ -1,5 +1,6 @@
 package com.granica.app.ui.screens
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,16 +38,18 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     var disableCameras by remember { mutableStateOf(settings.disableCameras) }
+    var darkMode by remember { mutableStateOf(settings.darkModeEnabled) }
     var selectedLanguage by remember { mutableStateOf(settings.selectedLanguage) }
     var pendingLanguage by remember { mutableStateOf(settings.selectedLanguage) }
     var pendingDisableCameras by remember { mutableStateOf(settings.disableCameras) }
-    val hasChanges = pendingLanguage != selectedLanguage || pendingDisableCameras != disableCameras
+    var pendingDarkMode by remember { mutableStateOf(settings.darkModeEnabled) }
+    val hasChanges = pendingLanguage != selectedLanguage || pendingDisableCameras != disableCameras || pendingDarkMode != darkMode
 
     Scaffold(
         topBar = {
             GranicaHeader(
-                title = "Настройки",
-                subtitle = "Управление камерами и языком",
+                title = settings.uiText("settings"),
+                subtitle = "Comfort & preferences",
                 onBack = onBack
             )
         }
@@ -72,9 +75,9 @@ fun SettingsScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column(modifier = Modifier.weight(1f)) {
-                            Text("Выключение камер", style = MaterialTheme.typography.titleMedium)
+                            Text(settings.uiText("toggle_cameras"), style = MaterialTheme.typography.titleMedium)
                             Text(
-                                "Если включено, камера будет выключена по умолчанию; если отключено — все потоки открываются сразу.",
+                                "If enabled, cameras stay off by default; if disabled, streams open immediately.",
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -93,15 +96,44 @@ fun SettingsScreen(
                     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(settings.uiText("dark_mode"), style = MaterialTheme.typography.titleMedium)
+                            Text(
+                                "Better for night use and easier on the eyes.",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        Switch(
+                            checked = pendingDarkMode,
+                            onCheckedChange = { pendingDarkMode = it }
+                        )
+                    }
+                }
+            }
+
+            item {
+                Card(
+                    shape = RoundedCornerShape(18.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        Text("Язык интерфейса", style = MaterialTheme.typography.titleMedium)
+                        Text(settings.uiText("language"), style = MaterialTheme.typography.titleMedium)
                         Text(
-                            "Советуется включить функцию выключения камер: потоковое видео расходует много интернета.",
+                            "Use the language that feels most comfortable for you.",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -137,9 +169,12 @@ fun SettingsScreen(
                     onClick = {
                         selectedLanguage = pendingLanguage
                         disableCameras = pendingDisableCameras
+                        darkMode = pendingDarkMode
                         settings.selectedLanguage = pendingLanguage
                         settings.disableCameras = pendingDisableCameras
+                        settings.darkModeEnabled = pendingDarkMode
                         settings.applySelectedLanguage(context)
+                        (context as? Activity)?.recreate()
                     },
                     enabled = hasChanges,
                     modifier = Modifier.fillMaxWidth(),
@@ -148,7 +183,7 @@ fun SettingsScreen(
                         disabledContainerColor = Color.Gray
                     )
                 ) {
-                    Text("Применить")
+                    Text(settings.uiText("apply"))
                 }
             }
         }
