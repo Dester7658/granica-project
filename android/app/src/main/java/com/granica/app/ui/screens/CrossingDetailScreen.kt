@@ -106,14 +106,14 @@ fun CrossingDetailScreen(
                 item {
                     s.data.waitMinutes?.let { minutes ->
                         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-                            Text("Время ожидания", style = MaterialTheme.typography.labelLarge)
+                            Text(settings.uiText("wait_time"), style = MaterialTheme.typography.labelLarge)
                             androidx.compose.foundation.layout.Spacer(modifier = Modifier.padding(4.dp))
-                            WaitBadge(minutes)
+                            WaitBadge(minutes, settings)
                         }
                     }
                 }
                 items(s.data.cameras) { camera ->
-                    CameraCard(crossing = s.data, camera = camera, defaultEnabled = !settings.disableCameras)
+                    CameraCard(crossing = s.data, camera = camera, defaultEnabled = !settings.disableCameras, settings = settings)
                 }
             }
         }
@@ -121,7 +121,7 @@ fun CrossingDetailScreen(
 }
 
 @Composable
-private fun CameraCard(crossing: CrossingDto, camera: CameraDto, defaultEnabled: Boolean = false) {
+private fun CameraCard(crossing: CrossingDto, camera: CameraDto, defaultEnabled: Boolean = false, settings: AppSettings) {
     var isEnabled by remember(camera.id, defaultEnabled) { mutableStateOf(defaultEnabled) }
     var isFullscreen by remember(camera.id) { mutableStateOf(false) }
 
@@ -133,7 +133,7 @@ private fun CameraCard(crossing: CrossingDto, camera: CameraDto, defaultEnabled:
             modifier = Modifier.fillMaxWidth()
         ) {
             if (!isEnabled) {
-                DisabledCamera(onEnable = { isEnabled = true })
+                DisabledCamera(settings = settings, onEnable = { isEnabled = true })
             } else {
                 CameraDisplay(
                     crossing = crossing,
@@ -144,7 +144,7 @@ private fun CameraCard(crossing: CrossingDto, camera: CameraDto, defaultEnabled:
         }
         if (isEnabled && (camera.type == "webview" || camera.pageUrl != null) && camera.snapshotUrl == null && camera.streamUrl == null) {
             Button(onClick = { isFullscreen = true }, modifier = Modifier.padding(top = 8.dp)) {
-                Text("Открыть во весь экран")
+                Text(settings.uiText("open_fullscreen"))
             }
         }
     }
@@ -159,14 +159,14 @@ private fun CameraCard(crossing: CrossingDto, camera: CameraDto, defaultEnabled:
 }
 
 @Composable
-private fun DisabledCamera(onEnable: () -> Unit) {
+private fun DisabledCamera(settings: AppSettings, onEnable: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxWidth().aspectRatio(4f / 3f).clickable(onClick = onEnable),
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Камера выключена", style = MaterialTheme.typography.titleMedium)
-            Text("Нажмите, чтобы включить", color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(settings.uiText("camera_disabled"), style = MaterialTheme.typography.titleMedium)
+            Text(settings.uiText("tap_to_enable"), color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
@@ -191,7 +191,7 @@ private fun CameraDisplay(crossing: CrossingDto, camera: CameraDto, modifier: Mo
             WebViewCamera(url = camera.pageUrl, modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f))
         }
         else -> {
-            DisabledCamera(onEnable = {})
+            DisabledCamera(settings = AppSettings(LocalContext.current), onEnable = {})
         }
     }
 }

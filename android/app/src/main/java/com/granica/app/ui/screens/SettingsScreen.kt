@@ -49,7 +49,7 @@ fun SettingsScreen(
         topBar = {
             GranicaHeader(
                 title = settings.uiText("settings"),
-                subtitle = "Comfort & preferences",
+                subtitle = settings.uiText("settings_subtitle"),
                 onBack = onBack
             )
         }
@@ -77,7 +77,7 @@ fun SettingsScreen(
                         Column(modifier = Modifier.weight(1f)) {
                             Text(settings.uiText("toggle_cameras"), style = MaterialTheme.typography.titleMedium)
                             Text(
-                                "If enabled, cameras stay off by default; if disabled, streams open immediately.",
+                                settings.uiText("cameras_hint"),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -106,7 +106,7 @@ fun SettingsScreen(
                         Column(modifier = Modifier.weight(1f)) {
                             Text(settings.uiText("dark_mode"), style = MaterialTheme.typography.titleMedium)
                             Text(
-                                "Better for night use and easier on the eyes.",
+                                settings.uiText("dark_mode_hint"),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -133,7 +133,7 @@ fun SettingsScreen(
                     ) {
                         Text(settings.uiText("language"), style = MaterialTheme.typography.titleMedium)
                         Text(
-                            "Use the language that feels most comfortable for you.",
+                            settings.uiText("language_hint"),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

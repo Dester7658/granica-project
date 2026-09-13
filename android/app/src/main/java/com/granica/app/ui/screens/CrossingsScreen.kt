@@ -35,6 +35,7 @@ import com.granica.app.ui.viewmodel.CrossingsViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CrossingsScreen(
+    settings: com.granica.app.AppSettings,
     title: String,
     viewModel: CrossingsViewModel,
     onCrossingClick: (CrossingDto) -> Unit,
@@ -43,7 +44,7 @@ fun CrossingsScreen(
     val state by viewModel.state.collectAsState()
 
     Scaffold(
-        topBar = { GranicaHeader(title = title, subtitle = "Переходы и камеры", onBack = onBack) }
+        topBar = { GranicaHeader(title = title, subtitle = settings.uiText("crossings_header"), onBack = onBack) }
     ) { padding ->
         when (val s = state) {
             is UiState.Loading -> Column(
@@ -79,9 +80,9 @@ fun CrossingsScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Column {
-                                Text("Переходы", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                                Text(settings.uiText("choose_border_short"), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
                                 Text(
-                                    "Выберите точку пересечения",
+                                    settings.uiText("choose_border"),
                                     style = MaterialTheme.typography.titleMedium,
                                     modifier = Modifier.padding(top = 3.dp)
                                 )
@@ -91,7 +92,7 @@ fun CrossingsScreen(
                     }
                 }
                 items(s.data) { crossing ->
-                    CrossingCard(crossing = crossing, onClick = { onCrossingClick(crossing) })
+                    CrossingCard(settings = settings, crossing = crossing, onClick = { onCrossingClick(crossing) })
                 }
             }
         }
@@ -99,7 +100,7 @@ fun CrossingsScreen(
 }
 
 @Composable
-private fun CrossingCard(crossing: CrossingDto, onClick: () -> Unit) {
+private fun CrossingCard(settings: com.granica.app.AppSettings, crossing: CrossingDto, onClick: () -> Unit) {
     Card(
         onClick = onClick,
         shape = RoundedCornerShape(20.dp),
@@ -114,19 +115,19 @@ private fun CrossingCard(crossing: CrossingDto, onClick: () -> Unit) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(crossing.name, style = MaterialTheme.typography.titleMedium)
                 Text(
-                    "${crossing.cameras.size} камер",
+                    "${crossing.cameras.size} ${settings.uiText("camera_count")}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 4.dp)
                 )
             }
-            crossing.waitMinutes?.let { WaitBadge(it) }
+            crossing.waitMinutes?.let { WaitBadge(it, settings) }
         }
     }
 }
 
 @Composable
-fun WaitBadge(minutes: Int) {
+fun WaitBadge(minutes: Int, settings: com.granica.app.AppSettings) {
     val color = when {
         minutes <= 10 -> Color(0xFF2E7D32)
         minutes <= 30 -> Color(0xFFF9A825)
@@ -134,7 +135,7 @@ fun WaitBadge(minutes: Int) {
     }
     Surface(color = color, shape = RoundedCornerShape(10.dp)) {
         Text(
-            "$minutes мин",
+            "$minutes ${settings.uiText("count")}",
             color = Color.White,
             style = MaterialTheme.typography.labelLarge,
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)

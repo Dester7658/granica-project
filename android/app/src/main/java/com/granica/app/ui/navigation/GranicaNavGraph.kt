@@ -66,6 +66,7 @@ fun GranicaNavGraph(repository: GranicaRepository, settings: AppSettings) {
             composable(Routes.COUNTRIES) {
                 val vm: CountriesViewModel = viewModel(factory = CountriesViewModel.Factory(repository))
                 CountriesScreen(
+                    settings = settings,
                     viewModel = vm,
                     localizedCountryName = { code, fallback -> settings.localizedCountryName(code, fallback) },
                     onCountryClick = { country ->
@@ -85,6 +86,7 @@ fun GranicaNavGraph(repository: GranicaRepository, settings: AppSettings) {
                 val countryName = java.net.URLDecoder.decode(backStackEntry.arguments?.getString("countryName").orEmpty(), "UTF-8")
                 val vm: BordersViewModel = viewModel(factory = BordersViewModel.Factory(repository, countryCode))
                 BordersScreen(
+                    settings = settings,
                     countryName = countryName,
                     countryCode = countryCode,
                     viewModel = vm,
@@ -110,6 +112,7 @@ fun GranicaNavGraph(repository: GranicaRepository, settings: AppSettings) {
                 val countryCode = backStackEntry.arguments?.getString("countryCode").orEmpty()
                 val vm: CrossingsViewModel = viewModel(factory = CrossingsViewModel.Factory(repository, borderId))
                 CrossingsScreen(
+                    settings = settings,
                     title = title,
                     viewModel = vm,
                     onCrossingClick = { crossing ->

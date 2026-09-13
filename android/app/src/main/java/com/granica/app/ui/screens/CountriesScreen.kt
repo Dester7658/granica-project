@@ -45,6 +45,7 @@ import com.granica.app.ui.viewmodel.CountriesViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CountriesScreen(
+    settings: com.granica.app.AppSettings,
     viewModel: CountriesViewModel,
     onCountryClick: (CountryDto) -> Unit,
     localizedCountryName: (String, String) -> String = { code, fallback -> fallback }
@@ -54,8 +55,8 @@ fun CountriesScreen(
     Scaffold(
         topBar = {
             GranicaHeader(
-                title = "Granica",
-                subtitle = "Откуда начинаем",
+                title = settings.uiText("app_name"),
+                subtitle = settings.uiText("origin_header"),
                 onBack = null
             )
         }
@@ -101,19 +102,19 @@ fun CountriesScreen(
                                     color = Color.White.copy(alpha = 0.18f)
                                 ) {
                                     Text(
-                                        "Откуда",
+                                        settings.uiText("choose_origin_short"),
                                         color = Color.White,
                                         style = MaterialTheme.typography.labelLarge,
                                         modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
                                     )
                                 }
                                 Text(
-                                    "Выберите страну выезда",
+                                    settings.uiText("choose_origin"),
                                     color = Color.White,
                                     style = MaterialTheme.typography.titleLarge
                                 )
                                 Text(
-                                    "Дальше покажем страны, с которыми есть граница и камеры",
+                                    settings.uiText("origin_details"),
                                     color = Color.White.copy(alpha = 0.85f),
                                     style = MaterialTheme.typography.bodyLarge
                                 )
@@ -124,6 +125,7 @@ fun CountriesScreen(
 
                 items(s.data) { country ->
                     CountryCard(
+                        settings = settings,
                         country = country,
                         countryName = localizedCountryName(country.code, country.name),
                         onClick = { onCountryClick(country) }
@@ -135,7 +137,7 @@ fun CountriesScreen(
 }
 
 @Composable
-private fun CountryCard(country: CountryDto, countryName: String, onClick: () -> Unit) {
+private fun CountryCard(settings: com.granica.app.AppSettings, country: CountryDto, countryName: String, onClick: () -> Unit) {
     Card(
         onClick = onClick,
         shape = RoundedCornerShape(22.dp),
@@ -166,7 +168,7 @@ private fun CountryCard(country: CountryDto, countryName: String, onClick: () ->
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        "Смотреть границы",
+                        settings.uiText("view_borders"),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

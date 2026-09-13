@@ -42,6 +42,7 @@ import com.granica.app.ui.viewmodel.BordersViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BordersScreen(
+    settings: com.granica.app.AppSettings,
     countryName: String,
     countryCode: String,
     viewModel: BordersViewModel,
@@ -55,7 +56,7 @@ fun BordersScreen(
         topBar = {
             GranicaHeader(
                 title = "${countryFlagEmoji(countryCode)}  $countryName",
-                subtitle = "Куда можно ехать",
+                subtitle = settings.uiText("destination_header"),
                 onBack = onBack
             )
         }
@@ -80,11 +81,11 @@ fun BordersScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        "Пока нет проверенных камер для границ этой страны",
+                        settings.uiText("empty_country_title"),
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
-                        "Мы добавляем только реальные, проверенные источники — эта страна ещё в очереди на добавление.",
+                        settings.uiText("empty_country_desc"),
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.padding(top = 8.dp)
                     )
@@ -111,9 +112,9 @@ fun BordersScreen(
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
                                 Column {
-                                    Text("Куда", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+                                    Text(settings.uiText("choose_destination_short"), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
                                     Text(
-                                        "Выберите страну назначения",
+                                        settings.uiText("choose_destination"),
                                         style = MaterialTheme.typography.titleMedium,
                                         modifier = Modifier.padding(top = 4.dp)
                                     )
@@ -132,6 +133,7 @@ fun BordersScreen(
 
                     items(s.data) { border ->
                         BorderCard(
+                            settings = settings,
                             countryCode = countryCode,
                             border = border,
                             localizedOtherCountryName = localizedOtherCountryName(border.otherCountryCode, border.otherCountryName),
@@ -145,7 +147,7 @@ fun BordersScreen(
 }
 
 @Composable
-private fun BorderCard(countryCode: String, border: BorderSummaryDto, localizedOtherCountryName: String, onClick: () -> Unit) {
+private fun BorderCard(settings: com.granica.app.AppSettings, countryCode: String, border: BorderSummaryDto, localizedOtherCountryName: String, onClick: () -> Unit) {
     Card(
         onClick = onClick,
         shape = RoundedCornerShape(22.dp),
@@ -179,7 +181,7 @@ private fun BorderCard(countryCode: String, border: BorderSummaryDto, localizedO
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        "${border.crossingCount} переходов",
+                        "${border.crossingCount} ${settings.uiText("crossing_count")}",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
