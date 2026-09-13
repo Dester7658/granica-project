@@ -60,6 +60,35 @@ class AppSettings(context: Context) {
         }
     }
 
+    fun localizedRouteLabel(raw: String): String {
+        val text = raw.trim()
+        if (text.isBlank()) return text
+
+        val entryMatch = Regex("^Въезд\\s+в\\s+(.+?)\\s+из\\s+(.+?)(?:\\s*\\(\\d+\\))?$")
+            .find(text)
+        val exitMatch = Regex("^Выезд\\s+из\\s+(.+?)\\s+в\\s+(.+?)(?:\\s*\\(\\d+\\))?$")
+            .find(text)
+
+        return when (selectedLanguage) {
+            "en" -> when {
+                entryMatch != null -> "Entry to ${entryMatch.groupValues[1]} from ${entryMatch.groupValues[2]}${suffixFrom(raw)}"
+                exitMatch != null -> "Exit from ${exitMatch.groupValues[1]} to ${exitMatch.groupValues[2]}${suffixFrom(raw)}"
+                else -> raw
+            }
+            "uk" -> when {
+                entryMatch != null -> "В'їзд до ${entryMatch.groupValues[1]} з ${entryMatch.groupValues[2]}${suffixFrom(raw)}"
+                exitMatch != null -> "В'їзд з ${exitMatch.groupValues[1]} до ${exitMatch.groupValues[2]}${suffixFrom(raw)}"
+                else -> raw
+            }
+            else -> raw
+        }
+    }
+
+    private fun suffixFrom(raw: String): String {
+        val match = Regex("(\\s*\\(\\d+\\))$").find(raw.trim())
+        return match?.value.orEmpty()
+    }
+
     fun uiText(key: String): String = when (selectedLanguage) {
         "en" -> when (key) {
             "app_name" -> "Granica"

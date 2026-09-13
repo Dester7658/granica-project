@@ -126,7 +126,7 @@ private fun CameraCard(crossing: CrossingDto, camera: CameraDto, defaultEnabled:
     var isFullscreen by remember(camera.id) { mutableStateOf(false) }
 
     Column(modifier = Modifier.fillMaxWidth().padding(12.dp)) {
-        Text(camera.name, style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(bottom = 8.dp))
+        Text(settings.localizedRouteLabel(camera.name), style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(bottom = 8.dp))
         Card(
             shape = RoundedCornerShape(16.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),

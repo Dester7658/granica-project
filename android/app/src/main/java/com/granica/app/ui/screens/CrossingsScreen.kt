@@ -113,7 +113,7 @@ private fun CrossingCard(settings: com.granica.app.AppSettings, crossing: Crossi
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text(crossing.name, style = MaterialTheme.typography.titleMedium)
+                Text(settings.localizedRouteLabel(crossing.name), style = MaterialTheme.typography.titleMedium)
                 Text(
                     "${crossing.cameras.size} ${settings.uiText("camera_count")}",
                     style = MaterialTheme.typography.bodyMedium,
