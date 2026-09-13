@@ -50,6 +50,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import coil.compose.AsyncImage
+import com.granica.app.AppSettings
 import com.granica.app.R
 import com.granica.app.data.api.NetworkModule
 import com.granica.app.data.model.CameraDto
