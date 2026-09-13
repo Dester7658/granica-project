@@ -537,7 +537,18 @@
       "id": "ro-ua",
       "countryA": "RO",
       "countryB": "UA",
-      "crossings": []
+      "crossings": [
+        {
+          "id": "ua-ro-status",
+          "name": "Украина / Румыния — статус границы",
+          "lat": 47.9270,
+          "lon": 25.5160,
+          "direction": "both",
+          "waitMinutes": 12,
+          "source": "static",
+          "cameras": []
+        }
+      ]
     },
     {
       "id": "ad-es",
