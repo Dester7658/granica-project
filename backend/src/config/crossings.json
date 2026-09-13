@@ -492,44 +492,14 @@
       "countryB": "MD",
       "crossings": [
         {
-          "id": "md-leuseni",
-          "name": "Leușeni / Albița",
-          "lat": 46.8092,
-          "lon": 28.1531,
+          "id": "md-status",
+          "name": "Молдова / Румыния — статус границы",
+          "lat": 47.1554,
+          "lon": 27.9878,
           "direction": "both",
-          "cameras": [
-            { "id": "md-leuseni-cam", "name": "Таможня Молдовы: Leușeni", "type": "snapshot", "snapshotUrl": "https://customs.gov.md/api/media/images/leuseni/snapshot.jpg", "refreshSeconds": 60 }
-          ]
-        },
-        {
-          "id": "md-sculeni",
-          "name": "Sculeni / Скулень",
-          "lat": 47.6958,
-          "lon": 27.4153,
-          "direction": "both",
-          "cameras": [
-            { "id": "md-sculeni-cam", "name": "Таможня Молдовы: Sculeni", "type": "snapshot", "snapshotUrl": "https://customs.gov.md/api/media/images/sculeni/snapshot.jpg", "refreshSeconds": 60 }
-          ]
-        },
-        {
-          "id": "md-otaci",
-          "name": "Otaci / Могилёв-Подольский",
-          "lat": 48.4319,
-          "lon": 27.7939,
-          "direction": "both",
-          "cameras": [
-            { "id": "md-otaci-cam", "name": "Таможня Молдовы: Otaci", "type": "snapshot", "snapshotUrl": "https://customs.gov.md/api/media/images/otaci/snapshot.jpg", "refreshSeconds": 60 }
-          ]
-        },
-        {
-          "id": "ro-online-traffic",
-          "name": "Очереди на КПП Румынии",
-          "lat": 46.8092,
-          "lon": 28.1531,
-          "direction": "both",
-          "cameras": [
-            { "id": "ro-online-traffic-page", "name": "Погранполиция Румынии: актуальные очереди", "type": "webview", "pageUrl": "https://www.politiadefrontiera.ro/ro/traficonline/", "refreshSeconds": 300 }
-          ]
+          "waitMinutes": 10,
+          "source": "static",
+          "cameras": []
         }
       ]
     },

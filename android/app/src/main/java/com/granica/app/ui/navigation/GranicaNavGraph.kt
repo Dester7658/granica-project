@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -22,12 +23,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.granica.app.AppSettings
 import com.granica.app.data.repository.GranicaRepository
 import com.granica.app.ui.screens.BordersScreen
 import com.granica.app.ui.screens.CountriesScreen
 import com.granica.app.ui.screens.CrossingDetailScreen
 import com.granica.app.ui.screens.CrossingsScreen
 import com.granica.app.ui.screens.FavoritesScreen
+import com.granica.app.ui.screens.SettingsScreen
 import com.granica.app.ui.viewmodel.BordersViewModel
 import com.granica.app.ui.viewmodel.CountriesViewModel
 import com.granica.app.ui.viewmodel.CrossingDetailViewModel
@@ -37,6 +40,7 @@ import com.granica.app.ui.viewmodel.FavoritesViewModel
 private object Routes {
     const val COUNTRIES = "countries"
     const val FAVORITES = "favorites"
+    const val SETTINGS = "settings"
     const val BORDERS = "borders/{countryCode}/{countryName}"
     const val CROSSINGS = "crossings/{borderId}/{title}/{countryCode}"
     const val DETAIL = "detail/{crossingId}/{countryCode}"
@@ -50,6 +54,7 @@ private object Routes {
 @Composable
 fun GranicaNavGraph(repository: GranicaRepository) {
     val navController = rememberNavController()
+    val appSettings = AppSettings(navController.context)
 
     Scaffold(
         bottomBar = { BottomBar(navController) }
@@ -133,6 +138,12 @@ fun GranicaNavGraph(repository: GranicaRepository) {
                     }
                 )
             }
+            composable(Routes.SETTINGS) {
+                SettingsScreen(
+                    settings = appSettings,
+                    onBack = { navController.popBackStack() }
+                )
+            }
         }
     }
 }
@@ -166,6 +177,18 @@ private fun BottomBar(navController: NavHostController) {
             },
             icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
             label = { Text("Избранное") }
+        )
+        NavigationBarItem(
+            selected = currentRoute?.hierarchy?.any { it.route == Routes.SETTINGS } == true,
+            onClick = {
+                navController.navigate(Routes.SETTINGS) {
+                    popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            },
+            icon = { Icon(Icons.Filled.Settings, contentDescription = null) },
+            label = { Text("Настройки") }
         )
     }
 }
