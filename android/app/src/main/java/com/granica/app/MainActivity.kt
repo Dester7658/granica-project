@@ -12,11 +12,14 @@ import com.granica.app.ui.theme.GranicaTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val repository = (application as GranicaApp).repository
+        val app = application as GranicaApp
+        val repository = app.repository
+        val settings = app.settings
+        settings.applySelectedLanguage(this)
         setContent {
             GranicaTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    GranicaNavGraph(repository = repository)
+                    GranicaNavGraph(repository = repository, settings = settings)
                 }
             }
         }

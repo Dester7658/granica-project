@@ -61,7 +61,11 @@ import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CrossingDetailScreen(viewModel: CrossingDetailViewModel, onBack: () -> Unit) {
+fun CrossingDetailScreen(
+    viewModel: CrossingDetailViewModel,
+    settings: AppSettings,
+    onBack: () -> Unit
+) {
     val state by viewModel.state.collectAsState()
     val isFavorite by viewModel.isFavorite.collectAsState()
 
@@ -108,7 +112,7 @@ fun CrossingDetailScreen(viewModel: CrossingDetailViewModel, onBack: () -> Unit)
                     }
                 }
                 items(s.data.cameras) { camera ->
-                    CameraCard(crossing = s.data, camera = camera)
+                    CameraCard(crossing = s.data, camera = camera, defaultEnabled = !settings.disableCameras)
                 }
             }
         }
@@ -116,8 +120,8 @@ fun CrossingDetailScreen(viewModel: CrossingDetailViewModel, onBack: () -> Unit)
 }
 
 @Composable
-private fun CameraCard(crossing: CrossingDto, camera: CameraDto) {
-    var isEnabled by remember(camera.id) { mutableStateOf(false) }
+private fun CameraCard(crossing: CrossingDto, camera: CameraDto, defaultEnabled: Boolean = false) {
+    var isEnabled by remember(camera.id, defaultEnabled) { mutableStateOf(defaultEnabled) }
     var isFullscreen by remember(camera.id) { mutableStateOf(false) }
 
     Column(modifier = Modifier.fillMaxWidth().padding(12.dp)) {

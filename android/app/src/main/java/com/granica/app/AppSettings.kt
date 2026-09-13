@@ -1,6 +1,8 @@
 package com.granica.app
 
 import android.content.Context
+import android.content.res.Configuration
+import java.util.Locale
 
 class AppSettings(context: Context) {
     private val prefs = context.getSharedPreferences("granica_settings", Context.MODE_PRIVATE)
@@ -28,6 +30,13 @@ class AppSettings(context: Context) {
         LanguageOption("pl", "Polski"),
         LanguageOption("ro", "Română")
     )
+
+    fun applySelectedLanguage(context: Context) {
+        val locale = Locale(selectedLanguage)
+        val config = Configuration(context.resources.configuration)
+        config.setLocale(locale)
+        context.resources.updateConfiguration(config, context.resources.displayMetrics)
+    }
 
     data class LanguageOption(val code: String, val label: String)
 

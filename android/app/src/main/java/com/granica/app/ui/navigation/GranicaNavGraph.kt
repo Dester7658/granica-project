@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.granica.app.AppSettings
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -52,9 +53,8 @@ private object Routes {
 }
 
 @Composable
-fun GranicaNavGraph(repository: GranicaRepository) {
+fun GranicaNavGraph(repository: GranicaRepository, settings: AppSettings) {
     val navController = rememberNavController()
-    val appSettings = AppSettings(navController.context)
 
     Scaffold(
         bottomBar = { BottomBar(navController) }
@@ -127,7 +127,7 @@ fun GranicaNavGraph(repository: GranicaRepository) {
                 val vm: CrossingDetailViewModel = viewModel(
                     factory = CrossingDetailViewModel.Factory(repository, crossingId, countryCode)
                 )
-                CrossingDetailScreen(viewModel = vm, onBack = { navController.popBackStack() })
+                CrossingDetailScreen(viewModel = vm, settings = settings, onBack = { navController.popBackStack() })
             }
             composable(Routes.FAVORITES) {
                 val vm: FavoritesViewModel = viewModel(factory = FavoritesViewModel.Factory(repository))
@@ -140,7 +140,7 @@ fun GranicaNavGraph(repository: GranicaRepository) {
             }
             composable(Routes.SETTINGS) {
                 SettingsScreen(
-                    settings = appSettings,
+                    settings = settings,
                     onBack = { navController.popBackStack() }
                 )
             }

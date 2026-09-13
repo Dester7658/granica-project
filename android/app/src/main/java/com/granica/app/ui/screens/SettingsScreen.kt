@@ -9,12 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
@@ -26,18 +24,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.granica.app.AppSettings
 import com.granica.app.ui.components.GranicaHeader
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     settings: AppSettings,
     onBack: () -> Unit
 ) {
+    val context = LocalContext.current
     var disableCameras by remember { mutableStateOf(settings.disableCameras) }
     var selectedLanguage by remember { mutableStateOf(settings.selectedLanguage) }
+    var pendingLanguage by remember { mutableStateOf(settings.selectedLanguage) }
+    var pendingDisableCameras by remember { mutableStateOf(settings.disableCameras) }
+    val hasChanges = pendingLanguage != selectedLanguage || pendingDisableCameras != disableCameras
 
     Scaffold(
         topBar = {
@@ -71,17 +74,14 @@ fun SettingsScreen(
                         Column(modifier = Modifier.weight(1f)) {
                             Text("Выключение камер", style = MaterialTheme.typography.titleMedium)
                             Text(
-                                "По умолчанию включено. Если отключить, все видеопотоки будут сразу включены.",
+                                "Если включено, камера будет выключена по умолчанию; если отключено — все потоки открываются сразу.",
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                         Switch(
-                            checked = disableCameras,
-                            onCheckedChange = {
-                                disableCameras = it
-                                settings.disableCameras = it
-                            }
+                            checked = pendingDisableCameras,
+                            onCheckedChange = { pendingDisableCameras = it }
                         )
                     }
                 }
@@ -101,7 +101,7 @@ fun SettingsScreen(
                     ) {
                         Text("Язык интерфейса", style = MaterialTheme.typography.titleMedium)
                         Text(
-                            "Советуем включить функцию выключения камер: потоковое видео расходует много интернета.",
+                            "Советуется включить функцию выключения камер: потоковое видео расходует много интернета.",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -113,8 +113,7 @@ fun SettingsScreen(
                 Card(
                     shape = RoundedCornerShape(14.dp),
                     onClick = {
-                        selectedLanguage = language.code
-                        settings.selectedLanguage = language.code
+                        pendingLanguage = language.code
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
@@ -126,10 +125,30 @@ fun SettingsScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(language.label)
-                        if (selectedLanguage == language.code) {
+                        if (pendingLanguage == language.code) {
                             Text("✓", style = MaterialTheme.typography.titleMedium)
                         }
                     }
+                }
+            }
+
+            item {
+                Button(
+                    onClick = {
+                        selectedLanguage = pendingLanguage
+                        disableCameras = pendingDisableCameras
+                        settings.selectedLanguage = pendingLanguage
+                        settings.disableCameras = pendingDisableCameras
+                        settings.applySelectedLanguage(context)
+                    },
+                    enabled = hasChanges,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (hasChanges) MaterialTheme.colorScheme.primary else Color.Gray,
+                        disabledContainerColor = Color.Gray
+                    )
+                ) {
+                    Text("Применить")
                 }
             }
         }
