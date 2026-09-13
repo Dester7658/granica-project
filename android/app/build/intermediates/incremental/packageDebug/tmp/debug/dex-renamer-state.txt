@@ -1,4 +1,4 @@
-#Sat Sep 12 15:30:22 CEST 2026
+#Sun Sep 13 14:06:40 CEST 2026
 base.0=C\:\\Users\\hguln\\Desktop\\granica_project\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\hguln\\Desktop\\granica_project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=C\:\\Users\\hguln\\Desktop\\granica_project\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\5\\classes.dex
