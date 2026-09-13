@@ -325,10 +325,10 @@
           "lat": 46.1728,
           "lon": 19.9708,
           "direction": "both",
+          "waitMinutes": 15,
           "cameras": [
             { "id": "amss-horgos-in", "name": "Horgoš - ulazak u Srbiju iz Mađarske", "type": "stream", "streamUrl": "https://kamere.amss.org.rs/horgos1/horgos1.m3u8", "refreshSeconds": 60 },
-            { "id": "amss-horgos-out", "name": "Horgoš - izlazak iz Srbije u Mađarsku", "type": "stream", "streamUrl": "https://kamere.amss.org.rs/horgos2/horgos2.m3u8", "refreshSeconds": 60 },
-            { "id": "hu-border-info", "name": "Полиция Венгрии: ожидание на границе", "type": "webview", "pageUrl": "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo", "refreshSeconds": 300 }
+            { "id": "amss-horgos-out", "name": "Horgoš - izlazak iz Srbije u Mađarsku", "type": "stream", "streamUrl": "https://kamere.amss.org.rs/horgos2/horgos2.m3u8", "refreshSeconds": 60 }
           ]
         }
       ]
@@ -337,7 +337,20 @@
       "id": "rs-ro",
       "countryA": "RS",
       "countryB": "RO",
-      "crossings": []
+      "crossings": [
+        {
+          "id": "vatin",
+          "name": "Vatin / Nădlac",
+          "lat": 45.1934,
+          "lon": 21.1431,
+          "direction": "both",
+          "waitMinutes": 20,
+          "cameras": [
+            { "id": "vatin-in", "name": "Vatin - ulazak u Srbiju iz Rumunije", "type": "stream", "streamUrl": "https://77.46.142.211:8081/Vatin/vatin1.m3u8", "refreshSeconds": 60 },
+            { "id": "vatin-out", "name": "Vatin - izlazak iz Srbije u Rumuniju", "type": "stream", "streamUrl": "https://77.46.142.211:8081/Vatin/vatin2.m3u8", "refreshSeconds": 60 }
+          ]
+        }
+      ]
     },
     {
       "id": "rs-mk",
