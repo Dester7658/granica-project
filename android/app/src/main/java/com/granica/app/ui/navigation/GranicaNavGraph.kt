@@ -67,8 +67,10 @@ fun GranicaNavGraph(repository: GranicaRepository, settings: AppSettings) {
                 val vm: CountriesViewModel = viewModel(factory = CountriesViewModel.Factory(repository))
                 CountriesScreen(
                     viewModel = vm,
+                    localizedCountryName = { code, fallback -> settings.localizedCountryName(code, fallback) },
                     onCountryClick = { country ->
-                        navController.navigate(Routes.borders(country.code, country.name))
+                        val displayName = settings.localizedCountryName(country.code, country.name)
+                        navController.navigate(Routes.borders(country.code, displayName))
                     }
                 )
             }
@@ -86,8 +88,10 @@ fun GranicaNavGraph(repository: GranicaRepository, settings: AppSettings) {
                     countryName = countryName,
                     countryCode = countryCode,
                     viewModel = vm,
+                    localizedOtherCountryName = { code, fallback -> settings.localizedCountryName(code, fallback) },
                     onBorderClick = { border ->
-                        val title = "$countryName ↔ ${border.otherCountryName}"
+                        val otherName = settings.localizedCountryName(border.otherCountryCode, border.otherCountryName)
+                        val title = "$countryName ↔ $otherName"
                         navController.navigate(Routes.crossings(border.id, title, countryCode))
                     },
                     onBack = { navController.popBackStack() }

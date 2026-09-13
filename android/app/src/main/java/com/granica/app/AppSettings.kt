@@ -38,6 +38,24 @@ class AppSettings(context: Context) {
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 
+    fun localizedCountryName(countryCode: String, fallback: String = countryCode): String {
+        val code = countryCode.trim().uppercase()
+        if (code.isBlank()) return fallback
+
+        val locale = Locale(selectedLanguage)
+        val countryLocale = when (code) {
+            "XK" -> Locale("sq", "XK")
+            else -> Locale("", code)
+        }
+
+        return try {
+            val display = countryLocale.getDisplayCountry(locale)
+            if (display.isNullOrBlank() || display == code) fallback else display
+        } catch (_: Exception) {
+            fallback
+        }
+    }
+
     data class LanguageOption(val code: String, val label: String)
 
     companion object {

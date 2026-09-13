@@ -36,7 +36,8 @@ import com.granica.app.ui.viewmodel.CountriesViewModel
 @Composable
 fun CountriesScreen(
     viewModel: CountriesViewModel,
-    onCountryClick: (CountryDto) -> Unit
+    onCountryClick: (CountryDto) -> Unit,
+    localizedCountryName: (String, String) -> String = { code, fallback -> fallback }
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -62,7 +63,11 @@ fun CountriesScreen(
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 items(s.data) { country ->
-                    CountryCard(country = country, onClick = { onCountryClick(country) })
+                    CountryCard(
+                        country = country,
+                        countryName = localizedCountryName(country.code, country.name),
+                        onClick = { onCountryClick(country) }
+                    )
                 }
             }
         }
@@ -70,7 +75,7 @@ fun CountriesScreen(
 }
 
 @Composable
-private fun CountryCard(country: CountryDto, onClick: () -> Unit) {
+private fun CountryCard(country: CountryDto, countryName: String, onClick: () -> Unit) {
     Card(
         onClick = onClick,
         shape = RoundedCornerShape(16.dp),
@@ -85,7 +90,7 @@ private fun CountryCard(country: CountryDto, onClick: () -> Unit) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(countryFlagEmoji(country.code), style = MaterialTheme.typography.headlineSmall)
                 Text(
-                    country.name,
+                    countryName,
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(start = 12.dp)
                 )

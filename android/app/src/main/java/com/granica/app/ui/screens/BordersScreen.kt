@@ -39,7 +39,8 @@ fun BordersScreen(
     countryCode: String,
     viewModel: BordersViewModel,
     onBorderClick: (BorderSummaryDto) -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    localizedOtherCountryName: (String, String) -> String = { _, fallback -> fallback }
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -91,6 +92,7 @@ fun BordersScreen(
                         BorderCard(
                             countryCode = countryCode,
                             border = border,
+                            localizedOtherCountryName = localizedOtherCountryName(border.otherCountryCode, border.otherCountryName),
                             onClick = { onBorderClick(border) }
                         )
                     }
@@ -101,7 +103,7 @@ fun BordersScreen(
 }
 
 @Composable
-private fun BorderCard(countryCode: String, border: BorderSummaryDto, onClick: () -> Unit) {
+private fun BorderCard(countryCode: String, border: BorderSummaryDto, localizedOtherCountryName: String, onClick: () -> Unit) {
     Card(
         onClick = onClick,
         shape = RoundedCornerShape(16.dp),
@@ -119,7 +121,7 @@ private fun BorderCard(countryCode: String, border: BorderSummaryDto, onClick: (
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    "${border.otherCountryName} · ${border.crossingCount} переходов",
+                    "$localizedOtherCountryName · ${border.crossingCount} переходов",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
