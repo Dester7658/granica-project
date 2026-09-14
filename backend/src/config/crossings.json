@@ -8,7 +8,6 @@
     { "code": "ME", "name": "Черногория" },
     { "code": "AL", "name": "Албания" },
     { "code": "TR", "name": "Турция" },
-    { "code": "XK", "name": "Косово" },
     { "code": "BG", "name": "Болгария" },
     { "code": "GR", "name": "Греция" },
     { "code": "IT", "name": "Италия" },
@@ -16,17 +15,12 @@
     { "code": "RO", "name": "Румыния" },
     { "code": "MK", "name": "Северная Македония" },
     { "code": "MD", "name": "Молдова" },
-    { "code": "AD", "name": "Андорра" },
     { "code": "ES", "name": "Испания" },
     { "code": "FR", "name": "Франция" },
     { "code": "UA", "name": "Украина" },
-    { "code": "FI", "name": "Финляндия" },
-    { "code": "NO", "name": "Норвегия" },
-    { "code": "CH", "name": "Швейцария" },
-    { "code": "SM", "name": "Сан-Марино" },
-    { "code": "VA", "name": "Ватикан" },
-    { "code": "US", "name": "США" },
-    { "code": "CA", "name": "Канада" }
+    { "code": "BY", "name": "Беларусь" },
+    { "code": "PL", "name": "Польша" },
+    { "code": "CH", "name": "Швейцария" }
   ],
   "borders": [
     {
@@ -521,34 +515,155 @@
       ]
     },
     {
-      "id": "ad-es",
-      "countryA": "AD",
-      "countryB": "ES",
-      "crossings": []
+      "id": "by-pl",
+      "countryA": "BY",
+      "countryB": "PL",
+      "crossings": [
+        {
+          "id": "by-warsaw-bridge",
+          "name": "Варшавский мост",
+          "lat": 52.1095,
+          "lon": 23.6849,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-warsaw-bridge-cam", "name": "Варшавский мост", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/brst112_c1.jpg?rnd=0.36412039973464394", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-brestovitsa-entry",
+          "name": "Берестовица (въезд в Республику Беларусь)",
+          "lat": 52.3778,
+          "lon": 23.6974,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-brestovitsa-entry-cam", "name": "Берестовица (въезд в Республику Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/gr05.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-brestovitsa-exit",
+          "name": "Берестовица (выезд из Республики Беларусь)",
+          "lat": 52.3778,
+          "lon": 23.6974,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-brestovitsa-exit-cam", "name": "Берестовица (выезд из Республики Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/gr02.jpg?", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-bruzgi-exit",
+          "name": "Брузги (выезд из Республики Беларусь)",
+          "lat": 52.5689,
+          "lon": 23.8047,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-bruzgi-exit-cam", "name": "Брузги (выезд из Республики Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/gr01.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-bruzgi-entry",
+          "name": "Брузги (въезд в Республику Беларусь)",
+          "lat": 52.5689,
+          "lon": 23.8047,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-bruzgi-entry-cam", "name": "Брузги (въезд в Республику Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/gr06.jpg", "refreshSeconds": 60 }
+          ]
+        }
+      ]
     },
     {
-      "id": "ad-fr",
-      "countryA": "AD",
-      "countryB": "FR",
-      "crossings": []
+      "id": "by-lt",
+      "countryA": "BY",
+      "countryB": "LT",
+      "crossings": [
+        {
+          "id": "by-kamenniy-log-exit",
+          "name": "Каменный Лог (выезд из Республики Беларусь)",
+          "lat": 54.2313,
+          "lon": 25.3237,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-kamenniy-log-exit-cam", "name": "Каменный Лог (выезд из Республики Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/OSH1.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-kamenniy-log-entry",
+          "name": "Каменный Лог (въезд в Республику Беларусь)",
+          "lat": 54.2313,
+          "lon": 25.3237,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-kamenniy-log-entry-cam", "name": "Каменный Лог (въезд в Республику Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/OSH4.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-privalka-exit",
+          "name": "Привалка (выезд из Республики Беларусь)",
+          "lat": 54.1567,
+          "lon": 25.4513,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-privalka-exit-cam", "name": "Привалка (выезд из Республики Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/gr03.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-privalka-entry",
+          "name": "Привалка (въезд в Республику Беларусь)",
+          "lat": 54.1567,
+          "lon": 25.4513,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-privalka-entry-cam", "name": "Привалка (въезд в Республику Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/gr04.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-benyakonis-exit",
+          "name": "Бенякони (выезд из Республики Беларусь)",
+          "lat": 54.4830,
+          "lon": 25.6777,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-benyakonis-exit-cam", "name": "Бенякони (выезд из Республики Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/ben2.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-benyakonis-entry",
+          "name": "Бенякони (въезд в Республику Беларусь)",
+          "lat": 54.4830,
+          "lon": 25.6777,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-benyakonis-entry-cam", "name": "Бенякони (въезд в Республику Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/ben1.jpg", "refreshSeconds": 60 }
+          ]
+        }
+      ]
     },
     {
-      "id": "it-sm",
-      "countryA": "IT",
-      "countryB": "SM",
-      "crossings": []
-    },
-    {
-      "id": "it-va",
-      "countryA": "IT",
-      "countryB": "VA",
-      "crossings": []
-    },
-    {
-      "id": "fi-no",
-      "countryA": "FI",
-      "countryB": "NO",
-      "crossings": []
+      "id": "by-lv",
+      "countryA": "BY",
+      "countryB": "LV",
+      "crossings": [
+        {
+          "id": "by-grigorovshchina-exit",
+          "name": "Григоровщина (выезд из Республики Беларусь)",
+          "lat": 55.1047,
+          "lon": 26.4968,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-grigorovshchina-exit-cam", "name": "Григоровщина (выезд из Республики Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/vt01.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-grigorovshchina-entry",
+          "name": "Григоровщина (въезд в Республику Беларусь)",
+          "lat": 55.1047,
+          "lon": 26.4968,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-grigorovshchina-entry-cam", "name": "Григоровщина (въезд в Республику Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/vt02.jpg", "refreshSeconds": 60 }
+          ]
+        }
+      ]
     },
     {
       "id": "tr-bg",
