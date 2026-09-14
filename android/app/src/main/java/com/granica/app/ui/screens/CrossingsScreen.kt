@@ -9,18 +9,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -51,20 +46,30 @@ fun CrossingsScreen(
 
     Scaffold(
         topBar = {
-            Surface(
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.fillMaxWidth()
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(
+                                Color(0xFF102A5C),
+                                Color(0xFF1F4CC4),
+                                Color(0xFF27B7B4)
+                            )
+                        )
+                    )
+                    .padding(horizontal = 18.dp, vertical = 20.dp)
             ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 18.dp, vertical = 12.dp)
-                ) {
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(
+                        "Border route",
+                        color = Color.White.copy(alpha = 0.76f),
+                        style = MaterialTheme.typography.labelLarge
+                    )
                     Text(
                         title,
                         color = Color.White,
-                        style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier.align(Alignment.CenterStart)
+                        style = MaterialTheme.typography.titleLarge
                     )
                 }
             }
@@ -100,7 +105,7 @@ fun CrossingsScreen(
 private fun CrossingCard(settings: AppSettings, crossing: CrossingDto, onClick: () -> Unit) {
     Card(
         onClick = onClick,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(22.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -110,7 +115,11 @@ private fun CrossingCard(settings: AppSettings, crossing: CrossingDto, onClick: 
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text(settings.localizedRouteLabel(crossing.name), style = MaterialTheme.typography.titleMedium)
+                Text(
+                    settings.localizedRouteLabel(crossing.name),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
                 Text(
                     "${crossing.cameras.size} ${settings.uiText("camera_count")}",
                     style = MaterialTheme.typography.bodyMedium,

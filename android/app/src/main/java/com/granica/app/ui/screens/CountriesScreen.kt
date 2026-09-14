@@ -8,20 +8,15 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -35,7 +30,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.granica.app.AppSettings
 import com.granica.app.data.model.CountryDto
 import com.granica.app.ui.UiState
@@ -54,21 +48,42 @@ fun CountriesScreen(
 
     Scaffold(
         topBar = {
-            Surface(
-                color = MaterialTheme.colorScheme.primary,
-                tonalElevation = 0.dp,
-                modifier = Modifier.fillMaxWidth()
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(
+                                Color(0xFF1E2A78),
+                                Color(0xFF2A5AE0),
+                                Color(0xFF2FC9C1)
+                            )
+                        )
+                    )
+                    .padding(horizontal = 18.dp, vertical = 22.dp)
             ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 18.dp, vertical = 14.dp)
-                ) {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
                         "Granica",
                         color = Color.White,
-                        style = MaterialTheme.typography.headlineSmall,
-                        modifier = Modifier.align(Alignment.CenterStart)
+                        style = MaterialTheme.typography.headlineSmall
+                    )
+                    Text(
+                        "Where do you start from?",
+                        color = Color.White.copy(alpha = 0.88f),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                }
+                Surface(
+                    shape = RoundedCornerShape(999.dp),
+                    color = Color.White.copy(alpha = 0.18f),
+                    modifier = Modifier.align(Alignment.TopEnd)
+                ) {
+                    Text(
+                        "LIVE",
+                        color = Color.White,
+                        style = MaterialTheme.typography.labelLarge,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                     )
                 }
             }
@@ -92,6 +107,40 @@ fun CountriesScreen(
                 contentPadding = PaddingValues(horizontal = 18.dp, vertical = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                item {
+                    Surface(
+                        shape = RoundedCornerShape(18.dp),
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 18.dp, vertical = 14.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Column {
+                                Text(
+                                    "Route",
+                                    style = MaterialTheme.typography.labelLarge,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                                Text(
+                                    "Choose the departure country",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Text(
+                                "→",
+                                style = MaterialTheme.typography.headlineMedium,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                }
+
                 items(s.data) { country ->
                     CountryCard(
                         settings = settings,
@@ -114,8 +163,8 @@ private fun CountryCard(
 ) {
     Card(
         onClick = onClick,
-        shape = RoundedCornerShape(20.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+        shape = RoundedCornerShape(22.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
@@ -129,7 +178,14 @@ private fun CountryCard(
                 Box(
                     modifier = Modifier
                         .clip(CircleShape)
-                        .background(Brush.linearGradient(listOf(Color(0xFFEEF3FF), Color(0xFFE9F8F6))))
+                        .background(
+                            Brush.linearGradient(
+                                listOf(
+                                    Color(0xFFECF3FF),
+                                    Color(0xFFE1FFF8)
+                                )
+                            )
+                        )
                         .padding(12.dp),
                     contentAlignment = Alignment.Center
                 ) {
@@ -140,6 +196,18 @@ private fun CountryCard(
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.padding(start = 14.dp)
+                )
+            }
+            Surface(
+                shape = RoundedCornerShape(999.dp),
+                color = Color(0xFFEEF3FF),
+                modifier = Modifier.padding(start = 8.dp)
+            ) {
+                Text(
+                    "route",
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.labelLarge,
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                 )
             }
         }
