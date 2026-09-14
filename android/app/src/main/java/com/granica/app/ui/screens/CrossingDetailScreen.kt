@@ -236,8 +236,9 @@ private fun VideoCamera(streamUrl: String, modifier: Modifier = Modifier) {
         factory = { ctx ->
             PlayerView(ctx).apply {
                 this.player = player
-                useController = true
-                controllerAutoShow = true
+                useController = false
+                controllerAutoShow = false
+                resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
             }
         },
         modifier = modifier
@@ -250,45 +251,57 @@ private fun WebViewCamera(url: String, modifier: Modifier) {
         modifier = modifier,
         factory = { context ->
             android.webkit.WebView(context).apply {
-                settings.javaScriptEnabled = false
+                settings.javaScriptEnabled = true
                 settings.builtInZoomControls = false
                 settings.displayZoomControls = false
                 settings.setSupportZoom(false)
                 settings.useWideViewPort = true
                 settings.loadWithOverviewMode = true
                 settings.allowFileAccess = true
-                setBackgroundColor(android.graphics.Color.TRANSPARENT)
+                settings.allowContentAccess = true
+                settings.domStorageEnabled = true
+                settings.mediaPlaybackRequiresUserGesture = false
+                settings.databaseEnabled = true
+                settings.cacheMode = android.webkit.WebSettings.LOAD_DEFAULT
                 webViewClient = android.webkit.WebViewClient()
+                webChromeClient = android.webkit.WebChromeClient()
+                setBackgroundColor(android.graphics.Color.BLACK)
 
-                val imageHtml = """
-                    <html>
-                      <head>
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-                        <style>
-                          html, body {
-                            margin: 0;
-                            padding: 0;
-                            width: 100%;
-                            height: 100%;
-                            background: #000000;
-                            overflow: hidden;
-                          }
-                          img {
-                            display: block;
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                            object-position: center center;
-                          }
-                        </style>
-                      </head>
-                      <body>
-                        <img src="$url" alt="camera" />
-                      </body>
-                    </html>
-                """.trimIndent()
+                val lower = url.lowercase()
+                val isDirectImage = lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".png") || lower.endsWith(".gif") || lower.endsWith(".webp")
 
-                loadDataWithBaseURL(null, imageHtml, "text/html", "UTF-8", null)
+                if (isDirectImage) {
+                    val imageHtml = """
+                        <html>
+                          <head>
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+                            <style>
+                              html, body {
+                                margin: 0;
+                                padding: 0;
+                                width: 100%;
+                                height: 100%;
+                                background: #000000;
+                                overflow: hidden;
+                              }
+                              img {
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                object-position: center center;
+                              }
+                            </style>
+                          </head>
+                          <body>
+                            <img src="$url" alt="camera" />
+                          </body>
+                        </html>
+                    """.trimIndent()
+                    loadDataWithBaseURL(null, imageHtml, "text/html", "UTF-8", null)
+                } else {
+                    loadUrl(url)
+                }
             }
         }
     )
