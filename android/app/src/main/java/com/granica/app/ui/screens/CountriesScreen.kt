@@ -54,11 +54,48 @@ fun CountriesScreen(
 
     Scaffold(
         topBar = {
-            GranicaHeader(
-                title = settings.uiText("app_name"),
-                subtitle = settings.uiText("origin_header"),
-                onBack = null
-            )
+            Surface(
+                color = MaterialTheme.colorScheme.primary,
+                tonalElevation = 0.dp,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 18.dp, vertical = 14.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        listOf("🟢", "🟡", "🔵").forEach { dot ->
+                            Surface(
+                                shape = CircleShape,
+                                color = Color.White.copy(alpha = 0.22f),
+                                modifier = Modifier.size(18.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Text(dot, style = MaterialTheme.typography.labelSmall)
+                                }
+                            }
+                        }
+                    }
+                    Text(
+                        "BorderWatcher",
+                        color = Color.White,
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.padding(horizontal = 8.dp)
+                    )
+                    Surface(
+                        shape = CircleShape,
+                        color = Color.White.copy(alpha = 0.18f),
+                        modifier = Modifier.size(32.dp)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Text("?", color = Color.White, style = MaterialTheme.typography.titleMedium)
+                        }
+                    }
+                }
+            }
         }
     ) { padding ->
         when (val s = state) {
@@ -76,51 +113,66 @@ fun CountriesScreen(
 
             is UiState.Success -> LazyColumn(
                 modifier = Modifier.fillMaxSize().padding(padding),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
+                contentPadding = PaddingValues(horizontal = 18.dp, vertical = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 item {
+                    Text(
+                        "Welcome",
+                        style = MaterialTheme.typography.displaySmall,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.padding(top = 8.dp, bottom = 2.dp)
+                    )
+                }
+                item {
+                    Text(
+                        "Travel with BorderWatcher and share\nyour experiences with us!",
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        lineHeight = 34.sp
+                    )
+                }
+                item {
                     Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(24.dp),
-                        color = MaterialTheme.colorScheme.surface,
-                        tonalElevation = 1.dp
+                        onClick = { },
+                        modifier = Modifier.fillMaxWidth().padding(top = 12.dp, bottom = 8.dp),
+                        shape = RoundedCornerShape(26.dp),
+                        color = Color(0xFFE7EAF4)
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(
-                                    Brush.horizontalGradient(
-                                        listOf(GradientStart, GradientEnd)
-                                    )
-                                )
-                                .padding(20.dp)
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(horizontal = 18.dp, vertical = 18.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                                Surface(
-                                    shape = RoundedCornerShape(999.dp),
-                                    color = Color.White.copy(alpha = 0.18f)
-                                ) {
-                                    Text(
-                                        settings.uiText("choose_origin_short"),
-                                        color = Color.White,
-                                        style = MaterialTheme.typography.labelLarge,
-                                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+                            Text(
+                                "Where do you start from?",
+                                style = MaterialTheme.typography.headlineSmall,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                modifier = Modifier.weight(1f)
+                            )
+                            Surface(
+                                shape = CircleShape,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(42.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        Icons.Filled.KeyboardArrowRight,
+                                        contentDescription = null,
+                                        tint = Color.White
                                     )
                                 }
-                                Text(
-                                    settings.uiText("choose_origin"),
-                                    color = Color.White,
-                                    style = MaterialTheme.typography.titleLarge
-                                )
-                                Text(
-                                    settings.uiText("origin_details"),
-                                    color = Color.White.copy(alpha = 0.85f),
-                                    style = MaterialTheme.typography.bodyLarge
-                                )
                             }
                         }
                     }
+                }
+                item {
+                    Text(
+                        "Favorites",
+                        style = MaterialTheme.typography.headlineLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
+                    )
                 }
 
                 items(s.data) { country ->
@@ -140,8 +192,8 @@ fun CountriesScreen(
 private fun CountryCard(settings: com.granica.app.AppSettings, country: CountryDto, countryName: String, onClick: () -> Unit) {
     Card(
         onClick = onClick,
-        shape = RoundedCornerShape(22.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
@@ -164,20 +216,20 @@ private fun CountryCard(settings: com.granica.app.AppSettings, country: CountryD
                 Column(modifier = Modifier.padding(start = 14.dp)) {
                     Text(
                         countryName,
-                        style = MaterialTheme.typography.titleMedium,
+                        style = MaterialTheme.typography.titleLarge,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        settings.uiText("view_borders"),
-                        style = MaterialTheme.typography.bodyMedium,
+                        "Vignette",
+                        style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
-            Icon(
-                Icons.Filled.KeyboardArrowRight,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
+            Text(
+                "☆",
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.headlineSmall
             )
         }
     }

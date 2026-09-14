@@ -44,7 +44,40 @@ fun CrossingsScreen(
     val state by viewModel.state.collectAsState()
 
     Scaffold(
-        topBar = { GranicaHeader(title = title, subtitle = settings.uiText("crossings_header"), onBack = onBack) }
+        topBar = {
+            Surface(
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 18.dp, vertical = 12.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = null,
+                            tint = Color.White
+                        )
+                    }
+                    Text(
+                        "Only favorites",
+                        color = Color.White,
+                        style = MaterialTheme.typography.titleLarge,
+                        modifier = Modifier.weight(1f),
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                    )
+                    Surface(
+                        shape = RoundedCornerShape(999.dp),
+                        color = Color.White.copy(alpha = 0.9f),
+                        modifier = Modifier.size(28.dp)
+                    ) {}
+                }
+            }
+        }
     ) { padding ->
         when (val s = state) {
             is UiState.Loading -> Column(
@@ -61,12 +94,12 @@ fun CrossingsScreen(
 
             is UiState.Success -> LazyColumn(
                 modifier = Modifier.fillMaxSize().padding(padding),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 item {
                     Surface(
-                        shape = RoundedCornerShape(22.dp),
+                        shape = RoundedCornerShape(20.dp),
                         color = MaterialTheme.colorScheme.surface,
                         tonalElevation = 1.dp,
                         modifier = Modifier.fillMaxWidth()
@@ -74,20 +107,34 @@ fun CrossingsScreen(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(Brush.horizontalGradient(listOf(Color(0xFFECF3FF), Color(0xFFE8FBF7))))
-                                .padding(16.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
+                                .padding(horizontal = 20.dp, vertical = 14.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
                         ) {
-                            Column {
-                                Text(settings.uiText("choose_border_short"), style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-                                Text(
-                                    settings.uiText("choose_border"),
-                                    style = MaterialTheme.typography.titleMedium,
-                                    modifier = Modifier.padding(top = 3.dp)
-                                )
+                            Text(
+                                "${title}",
+                                style = MaterialTheme.typography.headlineMedium,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                            )
+                        }
+                    }
+                }
+                item {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)
+                    ) {
+                        listOf("ABC", "Load", "Decreasing").forEach { label ->
+                            Surface(
+                                shape = RoundedCornerShape(999.dp),
+                                color = if (label == "Load") MaterialTheme.colorScheme.surfaceVariant else Color(0xFFE7EAF4),
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Box(modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp), contentAlignment = Alignment.Center) {
+                                    Text(label, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurface)
+                                }
                             }
-                            Text("${s.data.size}", style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.primary)
                         }
                     }
                 }
