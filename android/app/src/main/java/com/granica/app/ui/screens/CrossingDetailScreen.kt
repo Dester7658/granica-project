@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -172,6 +173,11 @@ private fun DisabledCamera(settings: AppSettings, onEnable: () -> Unit) {
     }
 }
 
+private fun isDirectImageUrl(url: String): Boolean {
+    val lower = url.lowercase()
+    return lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".png") || lower.endsWith(".gif") || lower.endsWith(".webp")
+}
+
 @Composable
 private fun CameraDisplay(crossing: CrossingDto, camera: CameraDto, modifier: Modifier = Modifier) {
     when {
@@ -186,15 +192,33 @@ private fun CameraDisplay(crossing: CrossingDto, camera: CameraDto, modifier: Mo
             )
         }
         camera.pageUrl != null -> {
-            WebViewCamera(url = camera.pageUrl, modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f))
+            if (isDirectImageUrl(camera.pageUrl)) {
+                DirectImageCamera(imageUrl = camera.pageUrl, modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f))
+            } else {
+                WebViewCamera(url = camera.pageUrl, modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f))
+            }
         }
         camera.type == "webview" && camera.pageUrl != null -> {
-            WebViewCamera(url = camera.pageUrl, modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f))
+            if (isDirectImageUrl(camera.pageUrl)) {
+                DirectImageCamera(imageUrl = camera.pageUrl, modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f))
+            } else {
+                WebViewCamera(url = camera.pageUrl, modifier = modifier.fillMaxWidth().aspectRatio(4f / 3f))
+            }
         }
         else -> {
             DisabledCamera(settings = AppSettings(LocalContext.current), onEnable = {})
         }
     }
+}
+
+@Composable
+private fun DirectImageCamera(imageUrl: String, modifier: Modifier = Modifier) {
+    AsyncImage(
+        model = imageUrl,
+        contentDescription = "Camera image",
+        contentScale = ContentScale.Crop,
+        modifier = modifier.fillMaxSize()
+    )
 }
 
 @Composable
@@ -212,6 +236,7 @@ private fun SnapshotCamera(crossing: CrossingDto, camera: CameraDto, modifier: M
     AsyncImage(
         model = camera.snapshotUrl ?: (NetworkModule.snapshotUrl(crossing.id, camera.id) + "&tick=$reloadTick"),
         contentDescription = camera.name,
+        contentScale = ContentScale.Crop,
         modifier = modifier
     )
 }
@@ -267,42 +292,7 @@ private fun WebViewCamera(url: String, modifier: Modifier) {
                 webViewClient = android.webkit.WebViewClient()
                 webChromeClient = android.webkit.WebChromeClient()
                 setBackgroundColor(android.graphics.Color.BLACK)
-
-                val lower = url.lowercase()
-                val isDirectImage = lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".png") || lower.endsWith(".gif") || lower.endsWith(".webp")
-
-                if (isDirectImage) {
-                    val imageHtml = """
-                        <html>
-                          <head>
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-                            <style>
-                              html, body {
-                                margin: 0;
-                                padding: 0;
-                                width: 100%;
-                                height: 100%;
-                                background: #000000;
-                                overflow: hidden;
-                              }
-                              img {
-                                display: block;
-                                width: 100%;
-                                height: 100%;
-                                object-fit: cover;
-                                object-position: center center;
-                              }
-                            </style>
-                          </head>
-                          <body>
-                            <img src="$url" alt="camera" />
-                          </body>
-                        </html>
-                    """.trimIndent()
-                    loadDataWithBaseURL(null, imageHtml, "text/html", "UTF-8", null)
-                } else {
-                    loadUrl(url)
-                }
+                loadUrl(url)
             }
         }
     )
@@ -311,7 +301,9 @@ private fun WebViewCamera(url: String, modifier: Modifier) {
 @Composable
 private fun FullScreenCamera(crossing: CrossingDto, camera: CameraDto, onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
-        if (camera.type == "webview" && camera.pageUrl != null) {
+        if (camera.pageUrl != null && isDirectImageUrl(camera.pageUrl)) {
+            DirectImageCamera(imageUrl = camera.pageUrl, modifier = Modifier.fillMaxSize())
+        } else if (camera.type == "webview" && camera.pageUrl != null) {
             WebViewCamera(url = camera.pageUrl, modifier = Modifier.fillMaxSize())
         } else {
             ZoomableSnapshot(crossing = crossing, camera = camera, onDismiss = onDismiss)
