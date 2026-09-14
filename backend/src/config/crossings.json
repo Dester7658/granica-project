@@ -577,6 +577,26 @@
       "countryB": "LT",
       "crossings": [
         {
+          "id": "by-kotlovka-exit",
+          "name": "Котловка (выезд из Республики Беларусь)",
+          "lat": 54.2785,
+          "lon": 25.3012,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-kotlovka-exit-cam", "name": "Котловка (выезд из Республики Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/OSH2.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
+          "id": "by-kotlovka-entry",
+          "name": "Котловка (въезд в Республику Беларусь)",
+          "lat": 54.2785,
+          "lon": 25.3012,
+          "direction": "both",
+          "cameras": [
+            { "id": "by-kotlovka-entry-cam", "name": "Котловка (въезд в Республику Беларусь)", "type": "webview", "pageUrl": "https://www.customs.gov.by/webcam/OSH3.jpg", "refreshSeconds": 60 }
+          ]
+        },
+        {
           "id": "by-kamenniy-log-exit",
           "name": "Каменный Лог (выезд из Республики Беларусь)",
           "lat": 54.2313,
