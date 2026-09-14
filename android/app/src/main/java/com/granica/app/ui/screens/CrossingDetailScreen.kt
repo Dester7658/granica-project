@@ -250,11 +250,45 @@ private fun WebViewCamera(url: String, modifier: Modifier) {
         modifier = modifier,
         factory = { context ->
             android.webkit.WebView(context).apply {
-                settings.javaScriptEnabled = true
-                settings.builtInZoomControls = true
+                settings.javaScriptEnabled = false
+                settings.builtInZoomControls = false
                 settings.displayZoomControls = false
+                settings.setSupportZoom(false)
+                settings.useWideViewPort = true
+                settings.loadWithOverviewMode = true
+                settings.allowFileAccess = true
+                setBackgroundColor(android.graphics.Color.TRANSPARENT)
                 webViewClient = android.webkit.WebViewClient()
-                loadUrl(url)
+
+                val imageHtml = """
+                    <html>
+                      <head>
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+                        <style>
+                          html, body {
+                            margin: 0;
+                            padding: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: #000000;
+                            overflow: hidden;
+                          }
+                          img {
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            object-position: center center;
+                          }
+                        </style>
+                      </head>
+                      <body>
+                        <img src="$url" alt="camera" />
+                      </body>
+                    </html>
+                """.trimIndent()
+
+                loadDataWithBaseURL(null, imageHtml, "text/html", "UTF-8", null)
             }
         }
     )
