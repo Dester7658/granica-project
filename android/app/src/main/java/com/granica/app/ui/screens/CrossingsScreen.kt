@@ -1,26 +1,19 @@
 package com.granica.app.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -30,7 +23,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.granica.app.data.model.CrossingDto
@@ -41,7 +33,6 @@ import com.granica.app.ui.viewmodel.CrossingsViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CrossingsScreen(
-    settings: com.granica.app.AppSettings,
     title: String,
     viewModel: CrossingsViewModel,
     onCrossingClick: (CrossingDto) -> Unit,
@@ -50,40 +41,7 @@ fun CrossingsScreen(
     val state by viewModel.state.collectAsState()
 
     Scaffold(
-        topBar = {
-            Surface(
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 18.dp, vertical = 12.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            Icons.Default.ArrowBack,
-                            contentDescription = null,
-                            tint = Color.White
-                        )
-                    }
-                    Text(
-                        "Only favorites",
-                        color = Color.White,
-                        style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier.weight(1f),
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                    )
-                    Surface(
-                        shape = RoundedCornerShape(999.dp),
-                        color = Color.White.copy(alpha = 0.9f),
-                        modifier = Modifier.size(28.dp)
-                    ) {}
-                }
-            }
-        }
+        topBar = { GranicaHeader(title = title, subtitle = "Переходы и камеры", onBack = onBack) }
     ) { padding ->
         when (val s = state) {
             is UiState.Loading -> Column(
@@ -100,52 +58,11 @@ fun CrossingsScreen(
 
             is UiState.Success -> LazyColumn(
                 modifier = Modifier.fillMaxSize().padding(padding),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                contentPadding = PaddingValues(12.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                item {
-                    Surface(
-                        shape = RoundedCornerShape(20.dp),
-                        color = MaterialTheme.colorScheme.surface,
-                        tonalElevation = 1.dp,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 20.dp, vertical = 14.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
-                        ) {
-                            Text(
-                                "${title}",
-                                style = MaterialTheme.typography.headlineMedium,
-                                color = MaterialTheme.colorScheme.onSurface,
-                                textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                            )
-                        }
-                    }
-                }
-                item {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        modifier = Modifier.fillMaxWidth().padding(vertical = 6.dp)
-                    ) {
-                        listOf("ABC", "Load", "Decreasing").forEach { label ->
-                            Surface(
-                                shape = RoundedCornerShape(999.dp),
-                                color = if (label == "Load") MaterialTheme.colorScheme.surfaceVariant else Color(0xFFE7EAF4),
-                                modifier = Modifier.weight(1f)
-                            ) {
-                                Box(modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp), contentAlignment = Alignment.Center) {
-                                    Text(label, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurface)
-                                }
-                            }
-                        }
-                    }
-                }
                 items(s.data) { crossing ->
-                    CrossingCard(settings = settings, crossing = crossing, onClick = { onCrossingClick(crossing) })
+                    CrossingCard(crossing = crossing, onClick = { onCrossingClick(crossing) })
                 }
             }
         }
@@ -153,34 +70,32 @@ fun CrossingsScreen(
 }
 
 @Composable
-private fun CrossingCard(settings: com.granica.app.AppSettings, crossing: CrossingDto, onClick: () -> Unit) {
+private fun CrossingCard(crossing: CrossingDto, onClick: () -> Unit) {
     Card(
         onClick = onClick,
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(settings.localizedRouteLabel(crossing.name), style = MaterialTheme.typography.titleMedium)
+            Column {
+                Text(crossing.name, style = MaterialTheme.typography.titleMedium)
                 Text(
-                    "${crossing.cameras.size} ${settings.uiText("camera_count")}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(top = 4.dp)
+                    "${crossing.cameras.size} камер",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-            crossing.waitMinutes?.let { WaitBadge(it, settings) }
+            crossing.waitMinutes?.let { WaitBadge(it) }
         }
     }
 }
 
 @Composable
-fun WaitBadge(minutes: Int, settings: com.granica.app.AppSettings) {
+fun WaitBadge(minutes: Int) {
     val color = when {
         minutes <= 10 -> Color(0xFF2E7D32)
         minutes <= 30 -> Color(0xFFF9A825)
@@ -188,7 +103,7 @@ fun WaitBadge(minutes: Int, settings: com.granica.app.AppSettings) {
     }
     Surface(color = color, shape = RoundedCornerShape(10.dp)) {
         Text(
-            "$minutes ${settings.uiText("count")}",
+            "$minutes мин",
             color = Color.White,
             style = MaterialTheme.typography.labelLarge,
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
