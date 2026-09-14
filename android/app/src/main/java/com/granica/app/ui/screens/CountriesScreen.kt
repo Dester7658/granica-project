@@ -59,41 +59,17 @@ fun CountriesScreen(
                 tonalElevation = 0.dp,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Row(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 18.dp, vertical = 14.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(horizontal = 18.dp, vertical = 14.dp)
                 ) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        listOf("🟢", "🟡", "🔵").forEach { dot ->
-                            Surface(
-                                shape = CircleShape,
-                                color = Color.White.copy(alpha = 0.22f),
-                                modifier = Modifier.size(18.dp)
-                            ) {
-                                Box(contentAlignment = Alignment.Center) {
-                                    Text(dot, style = MaterialTheme.typography.labelSmall)
-                                }
-                            }
-                        }
-                    }
                     Text(
-                        "BorderWatcher",
+                        "Granica",
                         color = Color.White,
                         style = MaterialTheme.typography.headlineSmall,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        modifier = Modifier.align(Alignment.CenterStart)
                     )
-                    Surface(
-                        shape = CircleShape,
-                        color = Color.White.copy(alpha = 0.18f),
-                        modifier = Modifier.size(32.dp)
-                    ) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Text("?", color = Color.White, style = MaterialTheme.typography.titleMedium)
-                        }
-                    }
                 }
             }
         }
@@ -116,65 +92,6 @@ fun CountriesScreen(
                 contentPadding = PaddingValues(horizontal = 18.dp, vertical = 12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                item {
-                    Text(
-                        "Welcome",
-                        style = MaterialTheme.typography.displaySmall,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.padding(top = 8.dp, bottom = 2.dp)
-                    )
-                }
-                item {
-                    Text(
-                        "Travel with BorderWatcher and share\nyour experiences with us!",
-                        style = MaterialTheme.typography.headlineSmall,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        lineHeight = 34.sp
-                    )
-                }
-                item {
-                    Surface(
-                        onClick = { },
-                        modifier = Modifier.fillMaxWidth().padding(top = 12.dp, bottom = 8.dp),
-                        shape = RoundedCornerShape(26.dp),
-                        color = Color(0xFFE7EAF4)
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(horizontal = 18.dp, vertical = 18.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(
-                                "Where do you start from?",
-                                style = MaterialTheme.typography.headlineSmall,
-                                color = MaterialTheme.colorScheme.onSurface,
-                                modifier = Modifier.weight(1f)
-                            )
-                            Surface(
-                                shape = CircleShape,
-                                color = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(42.dp)
-                            ) {
-                                Box(contentAlignment = Alignment.Center) {
-                                    Icon(
-                                        Icons.Filled.KeyboardArrowRight,
-                                        contentDescription = null,
-                                        tint = Color.White
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-                item {
-                    Text(
-                        "Favorites",
-                        style = MaterialTheme.typography.headlineLarge,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
-                    )
-                }
-
                 items(s.data) { country ->
                     CountryCard(
                         settings = settings,
@@ -218,24 +135,13 @@ private fun CountryCard(
                 ) {
                     Text(countryFlagEmoji(country.code), style = MaterialTheme.typography.headlineSmall)
                 }
-                Column(modifier = Modifier.padding(start = 14.dp)) {
-                    Text(
-                        countryName,
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Text(
-                        "Vignette",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+                Text(
+                    countryName,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.padding(start = 14.dp)
+                )
             }
-            Text(
-                "☆",
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.headlineSmall
-            )
         }
     }
 }
