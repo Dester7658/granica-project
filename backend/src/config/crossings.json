@@ -491,8 +491,6 @@
           "lat": 47.1554,
           "lon": 27.9878,
           "direction": "both",
-          "waitMinutes": 10,
-          "source": "static",
           "cameras": []
         }
       ]
@@ -508,8 +506,6 @@
           "lat": 47.9270,
           "lon": 25.5160,
           "direction": "both",
-          "waitMinutes": 12,
-          "source": "static",
           "cameras": []
         }
       ]
