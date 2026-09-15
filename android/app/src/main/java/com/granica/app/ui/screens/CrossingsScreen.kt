@@ -134,7 +134,7 @@ private fun CrossingCard(settings: AppSettings, crossing: CrossingDto, onClick: 
 
 @Composable
 fun WaitBadge(minutes: Int, settings: AppSettings? = null) {
-    val label = if (settings != null) "$minutes ${settings.uiText("count")}" else "$minutes мин"
+    val label = if (settings != null) "$minutes ${settings.uiText("minutes")}" else "$minutes мин"
     val color = when {
         minutes <= 10 -> Color(0xFF2E7D32)
         minutes <= 30 -> Color(0xFFF9A825)
