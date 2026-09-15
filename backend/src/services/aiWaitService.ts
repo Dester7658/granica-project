@@ -45,10 +45,11 @@ export async function estimateWaitFromCamera(
   const mediaType = image.contentType.startsWith("image/") ? image.contentType : "image/jpeg";
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${encodeURIComponent(apiKey)}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
     {
     method: "POST",
     headers: {
+      "x-goog-api-key": apiKey,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -75,7 +76,10 @@ export async function estimateWaitFromCamera(
     },
   );
 
-  if (!response.ok) throw new Error(`Gemini returned ${response.status}`);
+  if (!response.ok) {
+    const providerError = await response.text();
+    throw new Error(`Gemini returned ${response.status}: ${providerError.slice(0, 300)}`);
+  }
   const payload = (await response.json()) as {
     candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
   };
