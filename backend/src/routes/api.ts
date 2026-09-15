@@ -77,6 +77,11 @@ apiRouter.get("/crossings/:id/ai-estimate", async (req, res) => {
   try {
     res.json(await estimateWaitFromCamera(crossing, camera));
   } catch (err) {
+    console.error("AI estimate failed", {
+      crossingId: crossing.id,
+      cameraId: camera.id,
+      message: (err as Error).message,
+    });
     res.status(503).json({ error: "AI estimate unavailable", detail: (err as Error).message });
   }
 });
