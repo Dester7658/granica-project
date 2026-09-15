@@ -10,7 +10,7 @@ export interface AiWaitEstimate {
 }
 
 const MODEL = process.env.GEMINI_VISION_MODEL ?? "gemini-3.8-flash";
-const CACHE_TTL_SECONDS = 60;
+const CACHE_TTL_SECONDS = 600;
 const cache = new Map<string, { expiresAt: number; value: AiWaitEstimate }>();
 
 function imageUrlFor(camera: CameraConfig): string | undefined {
@@ -79,7 +79,7 @@ export async function estimateWaitFromCamera(
         body: requestBody,
       },
     );
-    if (response.ok || ![429, 500, 503].includes(response.status) || attempt === 1) break;
+    if (response.ok || ![500, 503].includes(response.status) || attempt === 1) break;
     await new Promise((resolve) => setTimeout(resolve, 600));
   }
 

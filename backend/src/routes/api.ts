@@ -82,6 +82,8 @@ apiRouter.get("/crossings/:id/ai-estimate", async (req, res) => {
       cameraId: camera.id,
       message: (err as Error).message,
     });
-    res.status(503).json({ error: "AI estimate unavailable", detail: (err as Error).message });
+    const message = (err as Error).message;
+    const status = message.includes("Gemini returned 429") ? 429 : 503;
+    res.status(status).json({ error: "AI estimate unavailable", detail: message });
   }
 });
