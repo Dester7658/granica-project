@@ -9,7 +9,7 @@ export interface AiWaitEstimate {
   source: "ai_camera_estimate";
 }
 
-const MODEL = process.env.GEMINI_VISION_MODEL ?? "gemini-3.6-flash";
+const MODEL = process.env.GEMINI_VISION_MODEL ?? "gemini-3.8-flash";
 const CACHE_TTL_SECONDS = 60;
 const cache = new Map<string, { expiresAt: number; value: AiWaitEstimate }>();
 

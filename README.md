@@ -43,7 +43,7 @@ GEMINI_API_KEY=ваш_ключ
 ```
 
 Дополнительно можно указать модель через `GEMINI_VISION_MODEL`; по умолчанию
-используется `gemini-3.6-flash`. Endpoint запускается приложением вручную:
+используется `gemini-3.8-flash`. Endpoint запускается приложением вручную:
 
 ```text
 GET /api/crossings/:id/ai-estimate?cameraId=:cameraId
