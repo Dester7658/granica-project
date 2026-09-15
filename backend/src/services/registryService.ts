@@ -1,12 +1,23 @@
 import registryJson from "../config/crossings.json";
 import { BorderConfig, CameraConfig, CountryMeta, CrossingConfig, CrossingsRegistry } from "../types";
 import { getWsdotBorder } from "./wsdotService";
+import { applyPolandWait, getPolandWaits } from "./polandWaitService";
 
 const staticRegistry = registryJson as CrossingsRegistry;
 
 async function getAllBorders(): Promise<BorderConfig[]> {
   const wsdotBorder = await getWsdotBorder();
-  return wsdotBorder ? [...staticRegistry.borders, wsdotBorder] : staticRegistry.borders;
+  let borders = wsdotBorder ? [...staticRegistry.borders, wsdotBorder] : [...staticRegistry.borders];
+  try {
+    const polandWaits = await getPolandWaits();
+    borders = borders.map((border) => ({
+      ...border,
+      crossings: border.crossings.map((crossing) => applyPolandWait(crossing, polandWaits)),
+    }));
+  } catch (error) {
+    console.error("Failed to fetch Poland wait source:", (error as Error).message);
+  }
+  return borders;
 }
 
 export function getCountries(): CountryMeta[] {

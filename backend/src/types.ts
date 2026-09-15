@@ -22,7 +22,7 @@ export interface CrossingConfig {
   /** Minutes of current wait, when the source provides live traffic data (e.g. WSDOT). */
   waitMinutes?: number;
   waitUpdatedAt?: string;
-  source?: "static" | "wsdot";
+  source?: "static" | "wsdot" | "poland";
 }
 
 export interface CountryMeta {
