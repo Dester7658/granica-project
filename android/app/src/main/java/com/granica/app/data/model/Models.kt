@@ -49,3 +49,12 @@ data class CrossingDto(
     val waitUpdatedAt: String? = null,
     val source: String? = null
 )
+
+@Serializable
+data class AiWaitEstimateDto(
+    val vehicleCount: Int,
+    val estimatedWaitMinutes: Int,
+    val confidence: String,
+    val analyzedAt: String,
+    val source: String
+)

@@ -7,6 +7,7 @@ import com.granica.app.data.model.BorderDto
 import com.granica.app.data.model.BorderSummaryDto
 import com.granica.app.data.model.CountryDto
 import com.granica.app.data.model.CrossingDto
+import com.granica.app.data.model.AiWaitEstimateDto
 import kotlinx.coroutines.flow.Flow
 
 class GranicaRepository(
@@ -20,6 +21,9 @@ class GranicaRepository(
     suspend fun getBorder(borderId: String): BorderDto = api.getBorder(borderId)
 
     suspend fun getCrossing(id: String): CrossingDto = api.getCrossing(id)
+
+    suspend fun getAiEstimate(crossingId: String, cameraId: String): AiWaitEstimateDto =
+        api.getAiEstimate(crossingId, cameraId)
 
     fun observeFavorites(): Flow<List<FavoriteCrossingEntity>> = favoritesDao.observeAll()
 

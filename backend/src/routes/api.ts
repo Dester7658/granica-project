@@ -7,6 +7,7 @@ import {
   getCrossingById,
 } from "../services/registryService";
 import { fetchSnapshot } from "../services/snapshotCache";
+import { estimateWaitFromCamera } from "../services/aiWaitService";
 
 export const apiRouter = Router();
 
@@ -54,5 +55,28 @@ apiRouter.get("/crossings/:id/cameras/:cameraId/snapshot", async (req, res) => {
     res.send(image.buffer);
   } catch (err) {
     res.status(502).json({ error: "Failed to fetch camera snapshot", detail: (err as Error).message });
+  }
+});
+
+apiRouter.get("/crossings/:id/ai-estimate", async (req, res) => {
+  const crossing = await getCrossingById(req.params.id);
+  if (!crossing) {
+    res.status(404).json({ error: "Crossing not found" });
+    return;
+  }
+
+  const requestedCameraId = typeof req.query.cameraId === "string" ? req.query.cameraId : undefined;
+  const camera = requestedCameraId
+    ? crossing.cameras.find((item) => item.id === requestedCameraId)
+    : crossing.cameras.find((item) => item.snapshotUrl || item.pageUrl);
+  if (!camera) {
+    res.status(422).json({ error: "No direct image camera is available for AI analysis" });
+    return;
+  }
+
+  try {
+    res.json(await estimateWaitFromCamera(crossing, camera));
+  } catch (err) {
+    res.status(503).json({ error: "AI estimate unavailable", detail: (err as Error).message });
   }
 });

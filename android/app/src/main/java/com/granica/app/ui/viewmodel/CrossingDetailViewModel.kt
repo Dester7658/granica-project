@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.granica.app.data.model.CrossingDto
+import com.granica.app.data.model.AiWaitEstimateDto
 import com.granica.app.data.repository.GranicaRepository
 import com.granica.app.ui.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,6 +22,9 @@ class CrossingDetailViewModel(
 
     private val _state = MutableStateFlow<UiState<CrossingDto>>(UiState.Loading)
     val state: StateFlow<UiState<CrossingDto>> = _state.asStateFlow()
+
+    private val _aiEstimate = MutableStateFlow<UiState<AiWaitEstimateDto>?>(null)
+    val aiEstimate: StateFlow<UiState<AiWaitEstimateDto>?> = _aiEstimate.asStateFlow()
 
     val isFavorite: StateFlow<Boolean> = repository.observeIsFavorite(crossingId)
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
@@ -44,6 +48,17 @@ class CrossingDetailViewModel(
         val crossing = (state.value as? UiState.Success)?.data ?: return
         viewModelScope.launch {
             repository.toggleFavorite(crossing, countryCode, isFavorite.value)
+        }
+    }
+
+    fun estimateWithAi(cameraId: String) {
+        viewModelScope.launch {
+            _aiEstimate.value = UiState.Loading
+            _aiEstimate.value = try {
+                UiState.Success(repository.getAiEstimate(crossingId, cameraId))
+            } catch (e: Exception) {
+                UiState.Error(e.message ?: "AI estimate unavailable")
+            }
         }
     }
 

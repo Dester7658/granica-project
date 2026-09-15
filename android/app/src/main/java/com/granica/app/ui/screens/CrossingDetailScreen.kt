@@ -106,6 +106,30 @@ fun CrossingDetailScreen(
 
             is UiState.Success -> LazyColumn(modifier = Modifier.fillMaxSize().padding(padding)) {
                 item {
+                    val firstImageCamera = s.data.cameras.firstOrNull { it.snapshotUrl != null || it.pageUrl != null }
+                    val aiState by viewModel.aiEstimate.collectAsState()
+                    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+                        Button(
+                            onClick = { firstImageCamera?.let { viewModel.estimateWithAi(it.id) } },
+                            enabled = firstImageCamera != null && aiState !is UiState.Loading
+                        ) {
+                            Text("Оценить очередь с ИИ")
+                        }
+                        when (val estimate = aiState) {
+                            is UiState.Loading -> CircularProgressIndicator(modifier = Modifier.padding(top = 8.dp))
+                            is UiState.Success -> Text(
+                                "ИИ: ${estimate.data.vehicleCount} машин, примерно ${estimate.data.estimatedWaitMinutes} мин. Уверенность: ${estimate.data.confidence}",
+                                modifier = Modifier.padding(top = 8.dp),
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                            is UiState.Error -> Text(
+                                "Оценка ИИ недоступна: ${estimate.message}",
+                                modifier = Modifier.padding(top = 8.dp),
+                                color = MaterialTheme.colorScheme.error
+                            )
+                            null -> Unit
+                        }
+                    }
                     s.data.waitMinutes?.let { minutes ->
                         Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
                             Text(settings.uiText("wait_time"), style = MaterialTheme.typography.labelLarge)
